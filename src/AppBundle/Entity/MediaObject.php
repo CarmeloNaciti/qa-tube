@@ -337,15 +337,15 @@ class MediaObject
     }
 
     /**
-     * @param File|null $mediaFile
+     * @param File|null $file
      *
      * @return $this
      */
-    public function setMediaFile(File $mediaFile = null)
+    public function setMediaFile(File $file = null)
     {
-        $this->mediaFile = $mediaFile;
+        $this->mediaFile = $file;
 
-        if ($mediaFile) {
+        if ($file) {
             $this->timestamp = new \DateTime('now');
         }
 
