@@ -2,6 +2,6 @@ _homepage:
     path: '/'
     defaults: { _controller: 'AppBundle:Default:index' }
 
-_test:
-    path: '/test'
-    defaults: { _controller: 'AppBundle:Default:test' }
+_add_media_object:
+    path: '/add-media-object'
+    defaults: { _controller: 'AppBundle:Default:addMediaObject' }

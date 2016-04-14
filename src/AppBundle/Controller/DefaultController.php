@@ -16,12 +16,8 @@ class DefaultController extends Controller
         ]);
     }
 
-    public function testAction()
+    public function addMediaObjectAction()
     {
-        echo 'Test';
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
-        ]);
+        return $this->render('default/addMediaObject.html.twig');
     }
 }
