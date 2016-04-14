@@ -3,10 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="qa_content")
+ * @Vich\Uploadable
  */
 class MediaObject
 {
@@ -63,9 +67,22 @@ class MediaObject
     protected $views;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="datetime", length=100)
      */
     protected $timestamp;
+
+    /**
+     * @Vich\UploadableField(mapping="media_entry", fileNameProperty="mediaName")
+     * @var File
+     */
+    protected $mediaName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    protected $mediaFile;
 
     /**
      * Get id

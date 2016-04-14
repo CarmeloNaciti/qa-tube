@@ -66,3 +66,11 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+vich_uploader:
+    db_driver: pdo_mysql
+
+    mappings:
+        product_image:
+            uri_prefix:         /media
+            upload_destination: "%kernel.root_dir%/../web/media"
