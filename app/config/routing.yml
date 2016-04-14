@@ -1,7 +1,7 @@
-#app:
-#    resource: "@AppBundle/Controller/"
-#    type:     annotation
-
 _homepage:
     path: '/'
-    defaults: { _controller: 'AppBundle:DefaultController:index' }
+    defaults: { _controller: 'AppBundle:Default:index' }
+
+_test:
+    path: '/test'
+    defaults: { _controller: 'AppBundle:Default:test' }
