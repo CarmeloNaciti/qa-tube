@@ -68,21 +68,24 @@ class MediaObject
 
     /**
      * @ORM\Column(type="datetime", length=100)
+     *
+     * @var \DateTime
      */
     protected $timestamp;
 
     /**
-     * @Vich\UploadableField(mapping="media_entry", fileNameProperty="mediaName")
+     * @Vich\UploadableField(mapping="media_entry", fileNameProperty="media_name")
+     * 
      * @var File
      */
-    protected $mediaName;
+    protected $mediaFile;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @var string
      */
-    protected $mediaFile;
+    protected $mediaName;
 
     /**
      * Get id
@@ -313,7 +316,7 @@ class MediaObject
     /**
      * Set timestamp
      *
-     * @param string $timestamp
+     * @param \DateTime $timestamp
      *
      * @return MediaObject
      */
@@ -327,10 +330,56 @@ class MediaObject
     /**
      * Get timestamp
      *
-     * @return string
+     * @return \DateTime
      */
     public function getTimestamp()
     {
         return $this->timestamp;
+    }
+
+    /**
+     * @param File|null $mediaFile
+     *
+     * @return $this
+     */
+    public function setMediaFile(File $mediaFile = null)
+    {
+        $this->mediaFile = $mediaFile;
+
+        if ($mediaFile) {
+            $this->timestamp = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get mediaFile
+     *
+     * @return File
+     */
+    public function getMediaFile()
+    {
+        return $this->mediaFile;
+    }
+
+    /**
+     * @param $name
+     *
+     * @return $this
+     */
+    public function setMediaName($name)
+    {
+        $this->mediaName = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return File
+     */
+    public function getMediaName()
+    {
+        return $this->mediaName;
     }
 }
