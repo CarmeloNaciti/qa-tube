@@ -5,3 +5,7 @@ _homepage:
 _add_media_object:
     path: '/add-media-object'
     defaults: { _controller: 'AppBundle:Default:addMediaObject' }
+
+_media_add_success:
+    path: '/add-success'
+    defaults: { _controller: 'AppBundle:Default:succussfullyAddedMedia' }
