@@ -13,7 +13,7 @@ class MediaObjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('mediaFile', FileType::class)
+            ->add('media_file', FileType::class)
             ->add('title', TextType::class)
             ->add('description', TextType::class)
             ->add('tags', TextType::class)
