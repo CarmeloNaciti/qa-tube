@@ -27,6 +27,10 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($mediaObject);
+            $manager->flush();
+
             return $this->redirectToRoute('_media_add_success');
         }
 
