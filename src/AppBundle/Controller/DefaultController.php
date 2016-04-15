@@ -11,8 +11,13 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+        $entities = $this->getDoctrine()
+            ->getRepository('AppBundle:MediaObject')
+            ->findBy(['type' => "New Feature"]);
+
         return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
+            'entities' => $entities,
+            'mimeType' => "video/mp4",
         ]);
     }
 
