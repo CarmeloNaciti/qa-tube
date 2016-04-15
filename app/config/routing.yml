@@ -2,10 +2,10 @@ _homepage:
     path: '/'
     defaults: { _controller: 'AppBundle:Default:index' }
 
-_add_media_object:
-    path: '/add-media-object'
+_add_object:
+    path: '/object/add'
     defaults: { _controller: 'AppBundle:Default:addMediaObject' }
 
-_media_add_success:
-    path: '/add-success'
-    defaults: { _controller: 'AppBundle:Default:succussfullyAddedMedia' }
+_view_object:
+    path: '/object/view/{id}'
+    defaults: { _controller: 'AppBundle:Default:viewMediaObject' }

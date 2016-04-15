@@ -11,8 +11,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        echo 'Index';
-        // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
         ]);
@@ -27,11 +25,26 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $originalName = $mediaObject->getMediaFile()->getClientOriginalName();
+            $mimeType = $mediaObject->getMediaFile()->getMimeType();
+
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($mediaObject);
             $manager->flush();
 
-            return $this->redirectToRoute('_media_add_success');
+            $this->addFlash('notice', 'Upload successful');
+
+            $entity = $this->getDoctrine()
+                ->getRepository('AppBundle:MediaObject')
+                ->findOneBy(['mediaName' => $originalName]);
+
+            return $this->redirectToRoute('_view_object',
+                [
+                    'id' => $entity->getId(),
+                    'mimeType' => $mimeType,
+                ]
+            );
         }
 
         return $this->render(
@@ -42,8 +55,22 @@ class DefaultController extends Controller
         );
     }
 
-    public function succussfullyAddedMediaAction()
+    public function viewMediaObjectAction(Request $request, $id)
     {
-        return $this->render('default/addSuccess.html.twig');
+        $mimeType = $request->get('mimeType');
+
+        $entity = $this->getDoctrine()
+            ->getRepository('AppBundle:MediaObject')
+            ->find($id);
+
+        $helper = $this->get('vich_uploader.templating.helper.uploader_helper');
+        $path = $helper->asset($entity, 'mediaFile');
+
+        return $this->render('default/addSuccess.html.twig',
+            [
+                'path' => $path,
+                'mimeType' => $mimeType,
+            ]
+        );
     }
 }
