@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <body>
+        <h3 class="footer navbar-default" style="text-align: center">{{ result|length }} Search Results for <em>{{ searchresult }}</em>:</h3><br>
+        <div class="container">
+        {% for entity in result %}
+                <div class="col-xs-4">
+                    <div class="demo-content bg-alt">
+                        <div class="panel panel-info">
+                            <div class="panel-heading" data-id="{{ entity.getId() }}">{{ entity.title }}</div>
+                            <div class="panel-body">
+                                <video id="" class="video-js vjs-default-skin" controls preload="auto" poster="" data-setup='{}' style="height: 200px">
+                                    <source src="http://qa-tube/media/{{ entity.getMediaName() }}" type="video/ogg">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+        </div>
+    </body>
+{% endblock %}

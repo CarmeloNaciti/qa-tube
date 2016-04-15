@@ -9,3 +9,7 @@ _add_object:
 _view_object:
     path: '/object/view/{id}'
     defaults: { _controller: 'AppBundle:Default:viewMediaObject' }
+
+_search_object:
+    path: '/object/search/{searchterm}'
+    defaults: { _controller: 'AppBundle:Default:search' }

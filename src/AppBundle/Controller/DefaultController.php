@@ -7,8 +7,16 @@ use AppBundle\Form\MediaObjectType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class DefaultController
+ *
+ * @package AppBundle\Controller
+ */
 class DefaultController extends Controller
 {
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function indexAction()
     {
         $mainRepository = $this->getDoctrine()
@@ -49,6 +57,11 @@ class DefaultController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function addMediaObjectAction(Request $request)
     {
         $mediaObject = new MediaObject();
@@ -86,7 +99,12 @@ class DefaultController extends Controller
         );
     }
 
-    public function viewMediaObjectAction(Request $request, $id)
+    /**
+     * @param $id
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function viewMediaObjectAction($id)
     {
         $entity = $this->getDoctrine()
             ->getRepository('AppBundle:MediaObject')
@@ -104,6 +122,27 @@ class DefaultController extends Controller
                 'user' => $entity->getUser() . ' (' . $entity->getTeam() . ')',
                 'story' => $entity->getStory() . ' on ' . $entity->getEnvironment() . ' (' . $entity->getType() . ')',
                 'date' => $entity->getTimestamp(),
+            ]
+        );
+    }
+
+    public function searchAction($searchterm)
+    {
+        $repository = $this->getDoctrine()
+            ->getRepository('AppBundle:MediaObject');
+
+        $query = $repository->createQueryBuilder('p')
+            ->where('LOWER(p.title) LIKE :searchterm')
+            ->setParameter('searchterm', '%'.$searchterm.'%')
+            ->orderBy('p.title', 'ASC')
+            ->getQuery();
+
+        $result = $query->getResult();
+
+        return $this->render('default/search.html.twig',
+            [
+                'result' => $result,
+                'searchresult' => $searchterm,
             ]
         );
     }

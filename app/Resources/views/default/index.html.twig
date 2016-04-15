@@ -7,7 +7,7 @@
                 <div class="panel-heading"><h5><strong>Featured Video: </strong>{{ mainEntity.getTitle() }}</h5></div>
                 <div class="panel-body">
                     <video id="" class="video-js vjs-default-skin" controls preload="auto" poster="" data-setup='{}' style="height: 350px">
-                        <source src="http://qa-tube/media/{{ mainEntity.getMediaName() }}" type="video/mp4">
+                        <source src="http://qa-tube/media/{{ mainEntity.getMediaName() }}" type="video/ogg">
                     </video>
                 </div>
             </div>
@@ -64,14 +64,4 @@
         </div>
     </div>
 
-    <script type="application/javascript">
-        $(function() {
-            $('.panel-heading').on('click', function(event) {
-                var $element = $(event.target),
-                    mediaId = $element.data('id');
-
-                window.location.href = "http://qa-tube/object/view/" + mediaId;
-            });
-        });
-    </script>
 {% endblock %}
