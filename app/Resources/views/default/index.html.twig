@@ -5,10 +5,10 @@
         {#<div class="jumbotron">#}
         <div class="col-sm-12">
             <div class="panel panel-primary">
-                <div class="panel-heading"><h5><strong>Featured Video:</strong>{{ mainEntity.getTitle() }}</h5></div>
+                <div class="panel-heading"><h5><strong>Featured Video: </strong>{{ mainEntity.getTitle() }}</h5></div>
                 <div class="panel-body">
-                    <video id="" class="video-js vjs-default-skin" controls preload="auto" poster="" data-setup='{}' style="height: 600px">
-                        <source src="http://qatube-local-lnx/media/{{ mainEntity.getMediaName() }}" type="video/mp4">
+                    <video id="" class="video-js vjs-default-skin" controls preload="auto" poster="" data-setup='{}' style="height: 350px">
+                        <source src="http://qa-tube/media/{{ mainEntity.getMediaName() }}" type="video/mp4">
                     </video>
                 </div>
             </div>
@@ -18,12 +18,12 @@
                 <div class="panel panel-success">
                     <div class="panel-body"><h5 style="text-align: center">Latest Videos</h5></div>
                 </div>
-                {% for entity in latestEntities %}
+                {% for entity in latestEntities|slice(0, 3) %}
                     <div class="panel panel-success">
-                        <div class="panel-heading" data-id="{{ entity.getId() }}" data-mime-type="{{ mimeType }}">{{ entity.getTitle() }}</div>
+                        <div class="panel-heading" data-id="{{ entity.getId() }}">{{ entity.getTitle() }}</div>
                         <div class="panel-body">
-                            <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 500px">
-                                <source src="http://qa-tube/media/{{ entity.getMediaName() }}" type="video/mp4">
+                            <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">
+                                <source src="http://qa-tube/media/{{ entity.getMediaName() }}" type="video/ogg">
                             </video>
                         </div>
                     </div>
@@ -34,12 +34,12 @@
                 <div class="panel panel-default">
                     <div class="panel-body"><h5 style="text-align: center">Most Popular</h5></div>
                 </div>
-                {% for entity in popularEntities %}
-                    <div class="panel panel-success">
-                        <div class="panel-heading" data-id="{{ entity.getId() }}" data-mime-type="{{ mimeType }}">{{ entity.getTitle() }}</div>
+                {% for entity in popularEntities|slice(0, 3) %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-id="{{ entity.getId() }}">{{ entity.getTitle() }}</div>
                         <div class="panel-body">
                             <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">
-                                <source src="http://qa-tube/media/{{ entity.getMediaName() }}" type="video/mp4">
+                                <source src="http://qa-tube/media/{{ entity.getMediaName() }}" type="video/ogg">
                             </video>
                         </div>
                     </div>
@@ -50,12 +50,12 @@
                 <div class="panel panel-danger">
                     <div class="panel-body"><h5 style="text-align: center">Training Videos</h5></div>
                 </div>
-                {% for entity in trainingEntities %}
-                    <div class="panel panel-success">
-                        <div class="panel-heading" data-id="{{ entity.getId() }}" data-mime-type="{{ mimeType }}">{{ entity.getTitle() }}</div>
+                {% for entity in trainingEntities|slice(0, 3) %}
+                    <div class="panel panel-danger">
+                        <div class="panel-heading" data-id="{{ entity.getId() }}">{{ entity.getTitle() }}</div>
                         <div class="panel-body">
                             <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">
-                                <source src="http://qa-tube/media/{{ entity.getMediaName() }}" type="video/mp4">
+                                <source src="http://qa-tube/media/{{ entity.getMediaName() }}" type="video/ogg">
                             </video>
                         </div>
                     </div>
@@ -69,10 +69,9 @@
         $(function() {
             $('.panel-heading').on('click', function(event) {
                 var $element = $(event.target),
-                    mediaId = $element.data('id'),
-                    mimeType = $element.data('mimeType');
+                    mediaId = $element.data('id');
 
-                window.location.href = "http://qa-tube/object/view/" + mediaId + "?mimeType=" + mimeType;
+                window.location.href = "http://qa-tube/object/view/" + mediaId;
             });
         });
     </script>

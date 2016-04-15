@@ -3,14 +3,37 @@
 {% block body %}
     <body>
         <div class="container">
+                <div class="jumbotron">
+                    <h2>{{ title }}</h2>
+                    <p><small>{{ description }}</small></p>
+                    Tags:
+                    {% for tag in tags %}
+                        <span class="label label-warning">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+
             <div class="row">
                 <div class="col-xs-4">
-                    <div class="demo-content"></div>
+                    <div class="demo-content">
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">Uploaded by:</div>
+                            <div class="panel-body">{{ user }}</div>
+                        </div>
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">Story:</div>
+                            <div class="panel-body">{{ story }}</div>
+                        </div>
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">Date:</div>
+                            <div class="panel-body">{{ date|date }}</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-xs-8">
                     <div class="demo-content bg-alt">
-                        <video id="really-cool-video" class="video-js vjs-default-skin" controls preload="auto" height="264" poster="" data-setup='{}'>
-                            <source src="{{ path }}" type="video/mp4">
+                        <video id="really-cool-video" class="video-js vjs-default-skin" controls preload="auto" height="500" poster="" data-setup='{}'>
+                            {#<source src="{{ path }}" type="video/mp4">#}
+                            <source src="{{ path }}" type="video/ogg">
                             <p class="vjs-no-js">
                                 To view this video please enable JavaScript, and consider upgrading to a web browser
                                 that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>

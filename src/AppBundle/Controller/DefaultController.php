@@ -46,7 +46,6 @@ class DefaultController extends Controller
             'latestEntities' => $latestEntities,
             'trainingEntities' => $trainingEntities,
             'popularEntities' => $popularEntities,
-            'mimeType' => "video/mp4",
         ]);
     }
 
@@ -61,7 +60,6 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $originalName = $mediaObject->getMediaFile()->getClientOriginalName();
-            $mimeType = $mediaObject->getMediaFile()->getMimeType();
 
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($mediaObject);
@@ -75,8 +73,7 @@ class DefaultController extends Controller
 
             return $this->redirectToRoute('_view_object',
                 [
-                    'id' => $entity->getId(),
-                    'mimeType' => $mimeType,
+                    'id' => $entity->getId()
                 ]
             );
         }
@@ -91,8 +88,6 @@ class DefaultController extends Controller
 
     public function viewMediaObjectAction(Request $request, $id)
     {
-        $mimeType = $request->get('mimeType');
-
         $entity = $this->getDoctrine()
             ->getRepository('AppBundle:MediaObject')
             ->find($id);
@@ -103,7 +98,12 @@ class DefaultController extends Controller
         return $this->render('default/addSuccess.html.twig',
             [
                 'path' => $path,
-                'mimeType' => $mimeType,
+                'title' => $entity->getTitle(),
+                'description' => $entity->getDescription(),
+                'tags' => explode(',', $entity->getTags()),
+                'user' => $entity->getUser() . ' (' . $entity->getTeam() . ')',
+                'story' => $entity->getStory() . ' on ' . $entity->getEnvironment() . ' (' . $entity->getType() . ')',
+                'date' => $entity->getTimestamp(),
             ]
         );
     }
