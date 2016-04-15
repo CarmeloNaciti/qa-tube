@@ -11,12 +11,29 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        $entities = $this->getDoctrine()
+        $latestEntities = $this->getDoctrine()
             ->getRepository('AppBundle:MediaObject')
-            ->findBy(['type' => "New Feature"]);
+            ->findBy(['type' => 'New Feature']);
+
+        $popularRepository = $this->getDoctrine()
+            ->getRepository('AppBundle:MediaObject');
+
+        $query = $popularRepository->createQueryBuilder('p')
+            ->where('p.views > :views')
+            ->setParameter('views', '10')
+            ->orderBy('p.views', 'ASC')
+            ->getQuery();
+
+        $popularEntities = $query->getResult();
+
+        $trainingEntities = $this->getDoctrine()
+            ->getRepository('AppBundle:MediaObject')
+            ->findBy(['type' => 'Training']);
 
         return $this->render('default/index.html.twig', [
-            'entities' => $entities,
+            'latestEntities' => $latestEntities,
+            'trainingEntities' => $trainingEntities,
+            'popularEntities' => $popularEntities,
             'mimeType' => "video/mp4",
         ]);
     }

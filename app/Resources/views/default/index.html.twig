@@ -18,7 +18,7 @@
                 <div class="panel panel-success">
                     <div class="panel-body"><h5 style="text-align: center">Latest Videos</h5></div>
                 </div>
-                {% for entity in entities %}
+                {% for entity in latestEntities %}
                     <div class="panel panel-success">
                         <div class="panel-heading" data-id="{{ entity.getId() }}" data-mime-type="{{ mimeType }}">{{ entity.getTitle() }}</div>
                         <div class="panel-body">
@@ -30,38 +30,38 @@
                     <br>
                 {% endfor %}
             </div>
-            {#<div class="col-sm-4">#}
-                {#<div class="panel panel-default">#}
-                    {#<div class="panel-body"><h5 style="text-align: center">Most Popular</h5></div>#}
-                {#</div>#}
-                {#{% for i in 0..2 %}#}
-                    {#<div class="panel panel-default">#}
-                        {#<div class="panel-heading" data-id="{{ mediaId }}" data-mime-type="{{ mimeType }}">Panel Heading</div>#}
-                        {#<div class="panel-body">#}
-                            {#<video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">#}
-                                {#<source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">#}
-                            {#</video>#}
-                        {#</div>#}
-                    {#</div>#}
-                    {#<br>#}
-                {#{% endfor %}#}
-            {#</div>#}
-            {#<div class="col-sm-4">#}
-                {#<div class="panel panel-danger">#}
-                    {#<div class="panel-body"><h5 style="text-align: center">Training Videos</h5></div>#}
-                {#</div>#}
-                {#{% for i in 0..2 %}#}
-                    {#<div class="panel panel-danger">#}
-                        {#<div class="panel-heading" data-id="{{ mediaId }}" data-mime-type="{{ mimeType }}">Panel Heading</div>#}
-                        {#<div class="panel-body">#}
-                            {#<video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">#}
-                                {#<source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">#}
-                            {#</video>#}
-                        {#</div>#}
-                    {#</div>#}
-                    {#<br>#}
-                {#{% endfor %}#}
-            {#</div>#}
+            <div class="col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-body"><h5 style="text-align: center">Most Popular</h5></div>
+                </div>
+                {% for entity in popularEntities %}
+                    <div class="panel panel-success">
+                        <div class="panel-heading" data-id="{{ entity.getId() }}" data-mime-type="{{ mimeType }}">{{ entity.getTitle() }}</div>
+                        <div class="panel-body">
+                            <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">
+                                <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-danger">
+                    <div class="panel-body"><h5 style="text-align: center">Training Videos</h5></div>
+                </div>
+                {% for entity in trainingEntities %}
+                    <div class="panel panel-success">
+                        <div class="panel-heading" data-id="{{ entity.getId() }}" data-mime-type="{{ mimeType }}">{{ entity.getTitle() }}</div>
+                        <div class="panel-body">
+                            <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">
+                                <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
