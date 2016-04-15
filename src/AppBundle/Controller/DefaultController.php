@@ -25,14 +25,10 @@ class DefaultController extends Controller
         $query = $mainRepository->createQueryBuilder('p')
             ->where('p.type = :views')
             ->setParameter('views', 'New Feature')
-            ->orderBy('p.timestamp', 'ASC')
+            ->orderBy('p.timestamp', 'DESC')
             ->getQuery();
 
         $mainEntity = $query->getResult();
-
-        $latestEntities = $this->getDoctrine()
-            ->getRepository('AppBundle:MediaObject')
-            ->findBy(['type' => 'New Feature']);
 
         $popularRepository = $this->getDoctrine()
             ->getRepository('AppBundle:MediaObject');
@@ -51,7 +47,7 @@ class DefaultController extends Controller
 
         return $this->render('default/index.html.twig', [
             'mainEntity' => $mainEntity[0],
-            'latestEntities' => $latestEntities,
+            'latestEntities' => $mainEntity,
             'trainingEntities' => $trainingEntities,
             'popularEntities' => $popularEntities,
         ]);

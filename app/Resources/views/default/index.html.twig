@@ -4,7 +4,7 @@
     <div class="container">
         <div class="col-sm-12">
             <div class="panel panel-primary">
-                <div class="panel-heading"><h5><strong>Featured Video: </strong>{{ mainEntity.getTitle() }}</h5></div>
+                <div class="panel-heading" data-id="{{ mainEntity.getId() }}"><h5><strong>Featured Video: </strong>{{ mainEntity.getTitle() }}</h5></div>
                 <div class="panel-body">
                     <video id="" class="video-js vjs-default-skin" controls preload="auto" poster="" data-setup='{}' style="height: 350px">
                         <source src="http://qa-tube/media/{{ mainEntity.getMediaName() }}" type="video/ogg">
