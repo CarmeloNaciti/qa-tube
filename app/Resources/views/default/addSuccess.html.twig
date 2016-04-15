@@ -1,13 +1,24 @@
-<h3>Submission success</h3>
-<h5>{{ path }}</h5>
-<h5>{{ mimeType }}</h5>
-<video id="really-cool-video" class="video-js vjs-default-skin" controls
-       preload="auto" width="640" height="264" poster=""
-       data-setup='{}'>
-    <source src="{{ path }}" type="{{ mimeType }}">
-    {#<source src="http://qa-tube/media/MWB-3725_MERGE.mp4" type="video/mp4">#}
-    <p class="vjs-no-js">
-        To view this video please enable JavaScript, and consider upgrading to a web browser
-        that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-    </p>
-</video>
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="demo-content"></div>
+                </div>
+                <div class="col-xs-8">
+                    <div class="demo-content bg-alt">
+                        <video id="really-cool-video" class="video-js vjs-default-skin" controls preload="auto" height="264" poster="" data-setup='{}'>
+                            <source src="{{ path }}" type="video/mp4">
+                            <p class="vjs-no-js">
+                                To view this video please enable JavaScript, and consider upgrading to a web browser
+                                that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                            </p>
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+{% endblock %}
