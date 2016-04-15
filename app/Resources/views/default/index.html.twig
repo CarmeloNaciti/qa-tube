@@ -5,10 +5,10 @@
         {#<div class="jumbotron">#}
         <div class="col-sm-12">
             <div class="panel panel-primary">
-                <div class="panel-heading"><h5><strong>Featured Video:</strong> Panel Heading</h5></div>
+                <div class="panel-heading"><h5><strong>Featured Video:</strong>{{ mainEntity.getTitle() }}</h5></div>
                 <div class="panel-body">
-                    <video id="" class="video-js vjs-default-skin" controls preload="auto" poster="" data-setup='{}'>
-                        <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+                    <video id="" class="video-js vjs-default-skin" controls preload="auto" poster="" data-setup='{}' style="height: 600px">
+                        <source src="http://qatube-local-lnx/media/{{ mainEntity.getMediaName() }}" type="video/mp4">
                     </video>
                 </div>
             </div>

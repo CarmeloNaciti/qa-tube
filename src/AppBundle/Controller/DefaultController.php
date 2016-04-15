@@ -11,6 +11,17 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+        $mainRepository = $this->getDoctrine()
+            ->getRepository('AppBundle:MediaObject');
+
+        $query = $mainRepository->createQueryBuilder('p')
+            ->where('p.type = :views')
+            ->setParameter('views', 'New Feature')
+            ->orderBy('p.timestamp', 'ASC')
+            ->getQuery();
+
+        $mainEntity = $query->getResult();
+
         $latestEntities = $this->getDoctrine()
             ->getRepository('AppBundle:MediaObject')
             ->findBy(['type' => 'New Feature']);
@@ -31,6 +42,7 @@ class DefaultController extends Controller
             ->findBy(['type' => 'Training']);
 
         return $this->render('default/index.html.twig', [
+            'mainEntity' => $mainEntity[0],
             'latestEntities' => $latestEntities,
             'trainingEntities' => $trainingEntities,
             'popularEntities' => $popularEntities,
