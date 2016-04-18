@@ -18,6 +18,8 @@ $(function() {
         var $element = $(event.target),
             mediaId = $element.data('id');
 
-        window.location.href = "http://qa-tube/object/view/" + mediaId;
+        if (parseInt(mediaId) >= 0) {
+            window.location.href = "http://qa-tube/object/view/" + mediaId;
+        }
     });
 });

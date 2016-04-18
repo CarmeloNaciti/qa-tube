@@ -34,9 +34,7 @@ class DefaultController extends Controller
             ->getRepository('AppBundle:MediaObject');
 
         $query = $popularRepository->createQueryBuilder('p')
-            ->where('p.views > :views')
-            ->setParameter('views', '10')
-            ->orderBy('p.views', 'ASC')
+            ->orderBy('p.views', 'DESC')
             ->getQuery();
 
         $popularEntities = $query->getResult();
@@ -88,7 +86,7 @@ class DefaultController extends Controller
         }
 
         return $this->render(
-            'default/addMediaObject.html.twig',
+            'default/object.add.html.twig',
             [
                 'form' => $form->createView()
             ]
@@ -109,15 +107,15 @@ class DefaultController extends Controller
         $helper = $this->get('vich_uploader.templating.helper.uploader_helper');
         $path = $helper->asset($entity, 'mediaFile');
 
-        return $this->render('default/addSuccess.html.twig',
+        $manager = $this->getDoctrine()->getManager();
+        $entity->setViews($entity->getViews() + 1);
+        $manager->flush();
+
+        return $this->render('default/object.view.html.twig',
             [
                 'path' => $path,
-                'title' => $entity->getTitle(),
-                'description' => $entity->getDescription(),
+                'entity' => $entity,
                 'tags' => explode(',', $entity->getTags()),
-                'user' => $entity->getUser() . ' (' . $entity->getTeam() . ')',
-                'story' => $entity->getStory() . ' on ' . $entity->getEnvironment() . ' (' . $entity->getType() . ')',
-                'date' => $entity->getTimestamp(),
             ]
         );
     }
@@ -135,7 +133,7 @@ class DefaultController extends Controller
 
         $result = $query->getResult();
 
-        return $this->render('default/search.html.twig',
+        return $this->render('default/search.results.html.twig',
             [
                 'result' => $result,
                 'searchresult' => $searchterm,

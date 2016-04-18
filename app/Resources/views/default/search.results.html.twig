@@ -8,10 +8,10 @@
                 <div class="col-xs-4">
                     <div class="demo-content bg-alt">
                         <div class="panel panel-info">
-                            <div class="panel-heading" data-id="{{ entity.getId() }}">{{ entity.title }}</div>
+                            <div class="panel-heading" data-id="{{ entity.id }}">{{ entity.title }}</div>
                             <div class="panel-body">
                                 <video id="" class="video-js vjs-default-skin" controls preload="auto" poster="" data-setup='{}' style="height: 200px">
-                                    <source src="http://qa-tube/media/{{ entity.getMediaName() }}" type="video/ogg">
+                                    <source src="http://qa-tube/media/{{ entity.mediaName }}" type="{{ entity.mimeType }}">
                                 </video>
                             </div>
                         </div>

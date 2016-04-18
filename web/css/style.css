@@ -9,3 +9,7 @@
     background-color: #f5f5f5;
     padding-top: 15px;
 }
+
+#views_label {
+    float: right;
+}

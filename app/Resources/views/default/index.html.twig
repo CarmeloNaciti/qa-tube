@@ -4,10 +4,10 @@
     <div class="container">
         <div class="col-sm-12">
             <div class="panel panel-primary">
-                <div class="panel-heading" data-id="{{ mainEntity.getId() }}"><h5><strong>Featured Video: </strong>{{ mainEntity.getTitle() }}</h5></div>
+                <div class="panel-heading" data-id="{{ mainEntity.id }}"><h5><strong>{{ 'panels.featured_video'|trans({}, 'labels') }} </strong>{{ mainEntity.title }}</h5></div>
                 <div class="panel-body">
                     <video id="" class="video-js vjs-default-skin" controls preload="auto" poster="" data-setup='{}' style="height: 350px">
-                        <source src="http://qa-tube/media/{{ mainEntity.getMediaName() }}" type="video/ogg">
+                        <source src="http://qa-tube/media/{{ mainEntity.mediaName }}" type="video/ogg">
                     </video>
                 </div>
             </div>
@@ -15,14 +15,14 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="panel panel-success">
-                    <div class="panel-body"><h5 style="text-align: center">Latest Videos</h5></div>
+                    <div class="panel-body"><h5 style="text-align: center">{{ 'panels.latest_videos'|trans({}, 'labels') }}</h5></div>
                 </div>
                 {% for entity in latestEntities|slice(0, 3) %}
                     <div class="panel panel-success">
-                        <div class="panel-heading" data-id="{{ entity.getId() }}">{{ entity.getTitle() }}</div>
+                        <div class="panel-heading" data-id="{{ entity.id }}">{{ entity.title }}</div>
                         <div class="panel-body">
                             <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">
-                                <source src="http://qa-tube/media/{{ entity.getMediaName() }}" type="video/ogg">
+                                <source src="http://qa-tube/media/{{ entity.mediaName }}" type="{{ entity.mimeType }}">
                             </video>
                         </div>
                     </div>
@@ -31,14 +31,14 @@
             </div>
             <div class="col-sm-4">
                 <div class="panel panel-default">
-                    <div class="panel-body"><h5 style="text-align: center">Most Popular</h5></div>
+                    <div class="panel-body"><h5 style="text-align: center">{{ 'panels.popular_videos'|trans({}, 'labels') }}</h5></div>
                 </div>
                 {% for entity in popularEntities|slice(0, 3) %}
                     <div class="panel panel-default">
-                        <div class="panel-heading" data-id="{{ entity.getId() }}">{{ entity.getTitle() }}</div>
+                        <div class="panel-heading" data-id="{{ entity.id }}">{{ entity.title }} <span class="label label-info" id="views_label">{{ entity.views }} views</span></div>
                         <div class="panel-body">
                             <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">
-                                <source src="http://qa-tube/media/{{ entity.getMediaName() }}" type="video/ogg">
+                                <source src="http://qa-tube/media/{{ entity.mediaName }}" type="{{ entity.mimeType }}">
                             </video>
                         </div>
                     </div>
@@ -47,14 +47,14 @@
             </div>
             <div class="col-sm-4">
                 <div class="panel panel-danger">
-                    <div class="panel-body"><h5 style="text-align: center">Training Videos</h5></div>
+                    <div class="panel-body"><h5 style="text-align: center">{{ 'panels.training_videos'|trans({}, 'labels') }}</h5></div>
                 </div>
                 {% for entity in trainingEntities|slice(0, 3) %}
                     <div class="panel panel-danger">
-                        <div class="panel-heading" data-id="{{ entity.getId() }}">{{ entity.getTitle() }}</div>
+                        <div class="panel-heading" data-id="{{ entity.id }}">{{ entity.title }}</div>
                         <div class="panel-body">
                             <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">
-                                <source src="http://qa-tube/media/{{ entity.getMediaName() }}" type="video/ogg">
+                                <source src="http://qa-tube/media/{{ entity.mediaName }}" type="{{ entity.mimeType }}">
                             </video>
                         </div>
                     </div>

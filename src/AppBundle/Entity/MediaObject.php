@@ -61,7 +61,7 @@ class MediaObject
     protected $user;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="integer")
      */
     protected $views;
 
@@ -85,6 +85,13 @@ class MediaObject
      * @var string
      */
     protected $mediaName;
+
+    /**
+     * @ORM\Column(type="string", length=45)
+     *
+     * @var string
+     */
+    protected $mimeType;
 
     /**
      * Get id
@@ -291,12 +298,13 @@ class MediaObject
     /**
      * Set views
      *
-     * @param string $views
+     * @param int $views
      *
      * @return MediaObject
      */
     public function setViews($views)
     {
+
         $this->views = $views;
 
         return $this;
@@ -305,7 +313,7 @@ class MediaObject
     /**
      * Get views
      *
-     * @return string
+     * @return int
      */
     public function getViews()
     {
@@ -380,5 +388,25 @@ class MediaObject
     public function getMediaName()
     {
         return $this->mediaName;
+    }
+
+    /**
+     * @param $mineType
+     *
+     * @return $this
+     */
+    public function setMimeType($mineType)
+    {
+        $this->mimeType = $mineType;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMimeType()
+    {
+        return $this->mimeType;
     }
 }

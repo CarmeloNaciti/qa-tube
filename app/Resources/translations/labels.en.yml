@@ -1,0 +1,13 @@
+buttons:
+    home: 'Home'
+    add: 'Add'
+panels:
+    featured_video: 'Featured Video:'
+    latest_videos: 'Latest Videos'
+    popular_videos: 'Most Popular'
+    training_videos: 'Training Videos'
+    uploaded_by: 'Uploaded By:'
+    story: 'Story:'
+    date: 'Date:'
+search:
+    placeholder: 'Search'
