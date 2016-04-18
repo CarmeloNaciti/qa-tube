@@ -28,8 +28,7 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "vich/uploader-bundle": "^1.0",
-        "videojs/video.js": "^5.9",
-        "twbs/bootstrap": "^3.3"
+        "videojs/video.js": "^5.9"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
