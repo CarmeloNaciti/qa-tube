@@ -35,7 +35,7 @@
                 </div>
                 {% for entity in popularEntities|slice(0, 3) %}
                     <div class="panel panel-default">
-                        <div class="panel-heading" data-id="{{ entity.id }}">{{ entity.title }} <span class="label label-info" id="views_label">{{ entity.views }} views</span></div>
+                        <div class="panel-heading" data-id="{{ entity.id }}">{{ entity.title }} <span class="label label-default" id="views_label">{{ entity.views }} views</span></div>
                         <div class="panel-body">
                             <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">
                                 <source src="http://qa-tube/media/{{ entity.mediaName }}" type="{{ entity.mimeType }}">
