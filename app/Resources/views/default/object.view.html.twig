@@ -3,14 +3,24 @@
 {% block body %}
     <body>
         <div class="container">
-                <div class="jumbotron">
-                    <h2>{{ entity.title }}</h2>
-                    <p><small>{{ entity.description }}</small></p>
-                    {{ 'tags'|trans }}
-                    {% for tag in tags %}
-                        <span class="label label-warning">{{ tag }}</span>
-                    {% endfor %}
+            <div class="row">
+                <div class="col-xs-12">
+                    {#<a href="{{ url('_delete_object', {'id' : entity.id}) }}" class="btn btn-info" role="button" id="object_actions">{{ 'buttons.delete'|trans({}, 'labels') }}</a>#}
+                    <button class="btn btn-info" id="delete_object" data-id="{{ entity.id }}">{{ 'buttons.delete'|trans({}, 'labels') }}</button>
+                    <a href="{{ url('_add_object', {'id' : entity.id}) }}" class="btn btn-info" role="button" id="edit_object">{{ 'buttons.edit'|trans({}, 'labels') }}</a>
                 </div>
+            </div>
+
+            <br>
+
+            <div class="jumbotron">
+                <h2>{{ entity.title }}</h2>
+                <p><small>{{ entity.description }}</small></p>
+                {{ 'tags'|trans }}
+                {% for tag in tags %}
+                    <span class="label label-warning">{{ tag }}</span>
+                {% endfor %}
+            </div>
 
             <div class="row">
                 <div class="col-xs-4">

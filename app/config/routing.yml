@@ -1,6 +1,11 @@
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
 _homepage:
     path: '/'
     defaults: { _controller: 'AppBundle:Default:index' }
+    options:
+        expose: true
 
 _add_object:
     path: '/object/add'
@@ -13,3 +18,9 @@ _view_object:
 _search_object:
     path: '/object/search/{searchterm}'
     defaults: { _controller: 'AppBundle:Default:search' }
+
+_delete_object:
+    path: '/object/delete/{id}'
+    defaults: { _controller: 'AppBundle:Default:deleteObject'}
+    options:
+        expose: true

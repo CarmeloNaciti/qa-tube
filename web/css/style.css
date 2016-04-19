@@ -13,3 +13,9 @@
 #views_label {
     float: right;
 }
+
+#edit_object, #delete_object{
+    float: right;
+    width: 100px;
+    margin-left: 10px;
+}

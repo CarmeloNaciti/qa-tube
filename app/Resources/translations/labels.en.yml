@@ -1,6 +1,8 @@
 buttons:
     home: 'Home'
     add: 'Add'
+    edit: 'Edit'
+    delete: 'Delete'
 panels:
     featured_video: 'Featured Video:'
     latest_videos: 'Latest Videos'

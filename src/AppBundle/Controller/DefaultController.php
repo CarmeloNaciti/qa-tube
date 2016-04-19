@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\MediaObject;
 use AppBundle\Form\MediaObjectType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -139,5 +140,25 @@ class DefaultController extends Controller
                 'searchresult' => $searchterm,
             ]
         );
+    }
+
+    /**
+     * @param $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteObjectAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em ->getRepository('AppBundle:MediaObject')->find($id);
+
+        if (!$entity) {
+            return new JsonResponse(['deleted' => false]);
+        }
+
+        $em->remove($entity);
+        $em->flush();
+
+        return new JsonResponse(['deleted' => true]);
     }
 }
