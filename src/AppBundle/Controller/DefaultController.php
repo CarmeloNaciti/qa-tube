@@ -57,9 +57,17 @@ class DefaultController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function addMediaObjectAction(Request $request)
+    public function addEditObjectAction(Request $request)
     {
         $mediaObject = new MediaObject();
+
+        if (!empty($request->get('id'))) {
+            $entity = $this->getDoctrine()
+                ->getRepository('AppBundle:MediaObject')
+                ->find($request->get('id'));
+
+            $mediaObject = $entity;
+        }
 
         $form = $this->createForm(MediaObjectType::class, $mediaObject);
 
@@ -99,7 +107,7 @@ class DefaultController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewMediaObjectAction($id)
+    public function viewObjectAction($id)
     {
         $entity = $this->getDoctrine()
             ->getRepository('AppBundle:MediaObject')

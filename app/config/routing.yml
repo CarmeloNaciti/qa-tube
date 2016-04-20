@@ -9,11 +9,11 @@ _homepage:
 
 _add_object:
     path: '/object/add'
-    defaults: { _controller: 'AppBundle:Default:addMediaObject' }
+    defaults: { _controller: 'AppBundle:Default:addEditObject' }
 
 _view_object:
     path: '/object/view/{id}'
-    defaults: { _controller: 'AppBundle:Default:viewMediaObject' }
+    defaults: { _controller: 'AppBundle:Default:viewObject' }
 
 _search_object:
     path: '/object/search/{searchterm}'
