@@ -57,17 +57,9 @@ class DefaultController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function addEditObjectAction(Request $request)
+    public function addObjectAction(Request $request)
     {
         $mediaObject = new MediaObject();
-
-        if (!empty($request->get('id'))) {
-            $entity = $this->getDoctrine()
-                ->getRepository('AppBundle:MediaObject')
-                ->find($request->get('id'));
-
-            $mediaObject = $entity;
-        }
 
         $form = $this->createForm(MediaObjectType::class, $mediaObject);
 
@@ -92,6 +84,33 @@ class DefaultController extends Controller
                     'id' => $entity->getId()
                 ]
             );
+        }
+
+        return $this->render(
+            'default/object.add.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+        );
+    }
+
+    public function editObjectAction(Request $request, $id)
+    {
+        $mediaObject = $this->getDoctrine()
+            ->getRepository('AppBundle:MediaObject')
+            ->find($id);
+
+        $form = $this->createForm(MediaObjectType::class, $mediaObject);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($mediaObject);
+            $manager->flush();
+
+            return $this->redirectToRoute('_view_object', ['id' => $id]);
         }
 
         return $this->render(

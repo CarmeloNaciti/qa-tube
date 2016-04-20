@@ -4,17 +4,21 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class MediaObjectType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('media_file', FileType::class)
+            ->add('mediaFile', VichFileType::class, array(
+                'required'      => false,
+                'allow_delete'  => false,
+                'download_link' => false,
+            ))
             ->add('title', TextType::class)
             ->add('description', TextType::class)
             ->add('tags', TextType::class)

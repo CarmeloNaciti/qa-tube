@@ -9,7 +9,7 @@ _homepage:
 
 _add_object:
     path: '/object/add'
-    defaults: { _controller: 'AppBundle:Default:addEditObject' }
+    defaults: { _controller: 'AppBundle:Default:addObject' }
 
 _view_object:
     path: '/object/view/{id}'
@@ -24,3 +24,7 @@ _delete_object:
     defaults: { _controller: 'AppBundle:Default:deleteObject'}
     options:
         expose: true
+
+_edit_object:
+    path: '/object/edit/{id}'
+    defaults: { _controller: 'AppBundle:Default:editObject' }
