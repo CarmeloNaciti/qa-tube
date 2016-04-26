@@ -7,7 +7,7 @@
                 <div class="panel-heading" data-id="{{ mainEntity.id }}"><h5><strong>{{ 'panels.featured_video'|trans({}, 'labels') }} </strong>{{ mainEntity.title }}</h5></div>
                 <div class="panel-body">
                     <video id="" class="video-js vjs-default-skin" controls preload="auto" poster="" data-setup='{}' style="height: 350px">
-                        <source src="http://qa-tube/media/{{ mainEntity.mediaName }}" type="video/ogg">
+                        <source src="{{ url('_media_item', {'mediaName' : mainEntity.mediaName}) }}" type="{{ mainEntity. mimeType }}">
                     </video>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                         <div class="panel-heading" data-id="{{ entity.id }}">{{ entity.title }}</div>
                         <div class="panel-body">
                             <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">
-                                <source src="http://qa-tube/media/{{ entity.mediaName }}" type="{{ entity.mimeType }}">
+                                <source src="{{ url('_media_item', {'mediaName' : entity.mediaName}) }}" type="{{ entity.mimeType }}">
                             </video>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                         <div class="panel-heading" data-id="{{ entity.id }}">{{ entity.title }} <span class="label label-default" id="views_label">{{ entity.views }} views</span></div>
                         <div class="panel-body">
                             <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">
-                                <source src="http://qa-tube/media/{{ entity.mediaName }}" type="{{ entity.mimeType }}">
+                                <source src="{{ url('_media_item', {'mediaName' : entity.mediaName}) }}" type="{{ entity.mimeType }}">
                             </video>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                         <div class="panel-heading" data-id="{{ entity.id }}">{{ entity.title }}</div>
                         <div class="panel-body">
                             <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">
-                                <source src="http://qa-tube/media/{{ entity.mediaName }}" type="{{ entity.mimeType }}">
+                                <source src="{{ url('_media_item', {'mediaName' : entity.mediaName}) }}" type="{{ entity.mimeType }}">
                             </video>
                         </div>
                     </div>

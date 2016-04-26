@@ -1,9 +1,10 @@
 $(function() {
     $('#search').on('click', function() {
-        var query = encodeURI($('#search_text').val().trim());
+        var $searchText = $('#search_text'),
+            query = encodeURI($searchText.val().trim());
 
         if (query.length > 0) {
-            var href = "http://qa-tube/object/search/" + encodeURI($('#search_text').val());
+            var href = Routing.generate('_search_object', {'searchterm' : encodeURI($searchText.val())});
 
             window.location.replace(href);
             window.location.href = href;
@@ -19,7 +20,7 @@ $(function() {
             mediaId = $element.data('id');
 
         if (parseInt(mediaId) >= 0) {
-            window.location.href = "http://qa-tube/object/view/" + mediaId;
+            window.location.href = Routing.generate('_view_object', {'id' : mediaId});
         }
     });
 });
@@ -39,7 +40,7 @@ $(function() {
             showCancelButton: true,
             confirmButtonText: 'Delete',
             closeOnConfirm: false,
-            animation: false,
+            animation: false
         }).then(function(isConfirm) {
 
             if(isConfirm) {
