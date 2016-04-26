@@ -1,0 +1,1 @@
+fos.Router.setData({"base_url":"","routes":{"_homepage":{"tokens":[["text","\/"]],"defaults":[],"requirements":[],"hosttokens":[]},"_delete_object":{"tokens":[["variable","\/","[^\/]++","id"],["text","\/object\/delete"]],"defaults":[],"requirements":[],"hosttokens":[]}},"prefix":"","host":"localhost","scheme":"http"});
