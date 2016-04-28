@@ -5,7 +5,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    {#<a href="{{ url('_delete_object', {'id' : entity.id}) }}" class="btn btn-info" role="button" id="object_actions">{{ 'buttons.delete'|trans({}, 'labels') }}</a>#}
                     <button class="btn btn-info" id="delete_object" data-id="{{ entity.id }}">{{ 'buttons.delete'|trans({}, 'labels') }}</button>
                     <a href="{{ url('_edit_object', {'id' : entity.id}) }}" class="btn btn-info" role="button" id="edit_object">{{ 'buttons.edit'|trans({}, 'labels') }}</a>
                 </div>

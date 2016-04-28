@@ -45,7 +45,7 @@ class DefaultController extends Controller
             ->findBy(['type' => 'Training']);
 
         return $this->render('default/index.html.twig', [
-            'mainEntity' => $mainEntity[0],
+            'mainEntity' => (!empty($mainEntity)) ? $mainEntity[0] : null,
             'latestEntities' => $mainEntity,
             'trainingEntities' => $trainingEntities,
             'popularEntities' => $popularEntities,
