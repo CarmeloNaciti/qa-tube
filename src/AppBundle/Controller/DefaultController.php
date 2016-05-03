@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\JiraManager;
 use AppBundle\Entity\MediaObject;
 use AppBundle\Form\MediaObjectType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
