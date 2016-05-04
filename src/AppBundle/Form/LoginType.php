@@ -23,11 +23,21 @@ class LoginType extends AbstractType
         $builder->add('username', TextType::class, [
             'label' => 'Username',
             'constraints' => new Assert\NotBlank(),
+            'attr' => [
+                'name' => '_username',
+                'class'=> 'form-control',
+                'placeholder' => 'Username',
+            ]
         ]);
 
         $builder->add('password', PasswordType::class, [
             'label' => 'Password',
             'constraints' => new Assert\NotBlank(),
+            'attr' => [
+                'name' => '_password',
+                'class'=> 'form-control',
+                'placeholder' => 'Password',
+            ]
         ]);
     }
 }

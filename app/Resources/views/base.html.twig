@@ -31,16 +31,16 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a href="/">{{ 'buttons.home'|trans({}, 'labels') }}</a></li>
-                    {#{% if is_granted('ROLE_USER') %}#}
-                    {% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+                    {% if is_granted('ROLE_USER') %}
+                    {#{% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}#}
                         <li><a href="/object/add">{{ 'buttons.add'|trans({}, 'labels') }}</a></li>
                     {% endif %}
                 </ul>
 
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group">
-                        {#{% if is_granted('ROLE_USER') %}#}
-                        {% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+                        {% if is_granted('ROLE_USER') %}
+                        {#{% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}#}
                             {#Logged in as {{ app.user.username }}#}
                         {% else %}
                             <a href="{{ url('_login') }}" class="btn btn-info" role="button">Login</a>

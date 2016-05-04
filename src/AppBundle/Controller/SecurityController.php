@@ -20,12 +20,6 @@ class SecurityController extends Controller
 
         $form = $this->createForm(LoginType::class);
 
-        $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
-
-        }
-
         return $this->render(
             'default/login.html.twig',
             [
