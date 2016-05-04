@@ -72,9 +72,3 @@ $(function() {
         })
     });
 });
-
-$(function() {
-    $('#login').on('click', function (event) {
-        $("#login-modal").modal();
-    })
-});
