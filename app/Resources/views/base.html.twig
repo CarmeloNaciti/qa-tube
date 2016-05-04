@@ -24,6 +24,18 @@
 
     </head>
     <body>
+        <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="loginmodal-container">
+                    <h4 style="text-align: center">Login to your JIRA Account</h4><br>
+                    <form>
+                        <input type="text" name="user" placeholder="Username">
+                        <input type="password" name="pass" placeholder="Password">
+                        <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+                    </form>
+                </div>
+            </div>
+        </div>
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -36,6 +48,7 @@
 
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group">
+                        <button type="button" class="btn btn-info" id="login">Login</button>
                         <input type="text" class="form-control" placeholder="{{ 'search.placeholder'|trans({}, 'labels') }}" id="search_text">
                     </div>
                     <button type="submit" class="btn btn-default" id="search"><span class="glyphicon glyphicon-search"></span></button>
