@@ -41,7 +41,7 @@
                     <div class="form-group">
                         {#{% if is_granted('ROLE_USER') %}#}
                         {% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
-                            Logged in as
+                            {#Logged in as {{ app.user.username }}#}
                         {% else %}
                             <a href="{{ url('_login') }}" class="btn btn-info" role="button">Login</a>
                         {% endif %}
