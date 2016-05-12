@@ -19,3 +19,8 @@
     width: 100px;
     margin-left: 10px;
 }
+
+#storyError {
+    margin-bottom: 10px;
+    color: #ff593b;
+}

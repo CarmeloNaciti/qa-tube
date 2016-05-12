@@ -19,6 +19,7 @@ class MediaObjectType extends AbstractType
                 'allow_delete'  => false,
                 'download_link' => false,
             ))
+            ->add('story', TextType::class)
             ->add('title', TextType::class)
             ->add('description', TextType::class)
             ->add('tags', TextType::class)
@@ -42,7 +43,6 @@ class MediaObjectType extends AbstractType
                     'Production' => 'Production',
                 ])
             )
-            ->add('story', TextType::class)
             ->add('type', ChoiceType::class, array(
                 'choices' => [
                     'Bugfix' => 'Bugfix',

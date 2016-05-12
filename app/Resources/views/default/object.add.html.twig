@@ -11,6 +11,9 @@
             <div class="col-xs-8">
                 <div class="demo-content bg-alt">
                     {{ form_start(form) }}
+                    {{ form_row(form.mediaFile) }}
+                    {{ form_row(form.story) }}
+                    <div id="storyError"></div>
                     {{ form_widget(form) }}
                     <input class="btn btn-info" type="submit" value="Submit" />
                     {{ form_end(form) }}
@@ -19,5 +22,5 @@
         </div>
     </div>
     </body>
+    <script src="{{ asset('js/video/add.js') }}"></script>
 {% endblock body %}
-

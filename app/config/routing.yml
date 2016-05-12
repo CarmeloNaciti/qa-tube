@@ -39,3 +39,9 @@ _login:
 
 _media_item:
     path: '/media/{mediaName}'
+
+_jira_get_story:
+    path: '/jira/fetch/{story}'
+    defaults: { _controller: 'AppBundle:Jira:fetchStoryDetails', story : "" }
+    options:
+        expose: true
