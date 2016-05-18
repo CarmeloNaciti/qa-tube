@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -11,6 +12,22 @@ use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class MediaObjectType extends AbstractType
 {
+    /**
+     * @var ContainerInterface
+     */
+    protected $containerInterface;
+
+    /**
+     * @inheritdoc
+     */
+    public function __construct(ContainerInterface $containerInterface)
+    {
+        $this->containerInterface = $containerInterface;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -23,37 +40,15 @@ class MediaObjectType extends AbstractType
             ->add('title', TextType::class)
             ->add('description', TextType::class)
             ->add('tags', TextType::class)
-            ->add('team', ChoiceType::class, array(
-                'choices' => [
-                    'Unsure' => 'Unsure',
-                    'Business Development Team' => 'Business Development Team',
-                    'CIC Team' => 'CIC Team',
-                    'Claims Development Team' => 'Claims Development Team',
-                    'Client Services Department Team' => 'Client Services Department Team',
-                    'Correspondance Development Team' => 'Correspondance Development Team',
-                    'Digital Client Channel Development Team' => 'Digital Client Channel Development Team',
-                    'Sales Team' => 'Sales Team',
-                ])
-            )
-            ->add('environment', ChoiceType::class, array(
-                'choices' => [
-                    'Web' => 'Web',
-                    'Merge' => 'Merge',
-                    'FAT' => 'FAT',
-                    'Production' => 'Production',
-                ])
-            )
-            ->add('type', ChoiceType::class, array(
-                'choices' => [
-                    'Bugfix' => 'Bugfix',
-                    'Improved Feature' => 'Improved Feature',
-                    'New Feature' => 'New Feature',
-                    'Training' => 'Training',
-                ])
-            )
+            ->add('team', ChoiceType::class, array('choices' => $this->containerInterface->getParameter('teams')))
+            ->add('environment', ChoiceType::class, array('choices' => $this->containerInterface->getParameter('environments')))
+            ->add('type', ChoiceType::class, array('choices' => $this->containerInterface->getParameter('issue_type')))
             ->add('user', TextType::class);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
