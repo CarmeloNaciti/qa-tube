@@ -5,8 +5,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <button class="btn btn-info" id="delete_object" data-id="{{ entity.id }}">{{ 'buttons.delete'|trans({}, 'labels') }}</button>
-                    <a href="{{ url('_edit_object', {'id' : entity.id}) }}" class="btn btn-info" role="button" id="edit_object">{{ 'buttons.edit'|trans({}, 'labels') }}</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <button class="btn btn-info" id="delete_object" data-id="{{ entity.id }}">{{ 'buttons.delete'|trans({}, 'labels') }}</button>
+                        <a href="{{ url('_edit_object', {'id' : entity.id}) }}" class="btn btn-info" role="button" id="edit_object">{{ 'buttons.edit'|trans({}, 'labels') }}</a>
+                    {% endif %}
                 </div>
             </div>
 

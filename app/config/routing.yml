@@ -37,6 +37,9 @@ _login:
     path: 'login'
     defaults: { _controller: 'AppBundle:Security:login' }
 
+logout:
+    path: '/logout'
+
 _media_item:
     path: '/media/{mediaName}'
 

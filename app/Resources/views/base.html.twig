@@ -31,18 +31,19 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a href="/">{{ 'buttons.home'|trans({}, 'labels') }}</a></li>
-                    {#{% if is_granted('ROLE_USER') %}#}
+                    {% if is_granted('ROLE_ADMIN') %}
                         <li><a href="/object/add">{{ 'buttons.add'|trans({}, 'labels') }}</a></li>
-                    {#{% endif %}#}
+                    {% endif %}
                 </ul>
 
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group">
-                        {% if is_granted('ROLE_USER') %}
-                            {#Logged in as {{ app.user.username }}#}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            Logged in as {{ app.user.username }}
                         {% else %}
                             <a href="{{ url('_login') }}" class="btn btn-info" role="button">Login</a>
                         {% endif %}
+                        <a href="/logout" class="btn btn-info" role="button">Logout</a>
                         <input type="text" class="form-control" placeholder="{{ 'search.placeholder'|trans({}, 'labels') }}" id="search_text">
                     </div>
                     <button type="submit" class="btn btn-default" id="search"><span class="glyphicon glyphicon-search"></span></button>

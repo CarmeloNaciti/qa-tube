@@ -5,10 +5,13 @@ security:
         in_memory:
             memory:
                 users:
-                    user: { password: password, roles: [ 'ROLE_USER' ] }
+                    admin:
+                        password: admin
+                        roles: 'ROLE_ADMIN'
 
     access_control:
-        - { path: /object/add, roles: ROLE_USER }
+        - { path: /object/add, roles: ROLE_ADMIN }
+        - { path: /object/edit, roles: ROLE_ADMIN }
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
@@ -21,15 +24,22 @@ security:
 #            pattern: ^/(_(profiler|wdt)|css|images|js)/
 #            security: false
 
-        main:
+        secured_area:
             anonymous: ~
             form_login:
                 login_path: /login
-                check_path: /login
+                check_path: /login_check
                 use_referer: true
                 post_only: true
                 username_parameter: _username
                 password_parameter: _password
+            logout:
+                path:   /logout
+                target: /
+            guard:
+                authenticators:
+                    - form_authenticator
+#            provider: main_db_provider
 
             # activate different ways to authenticate
 
