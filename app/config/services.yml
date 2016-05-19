@@ -6,7 +6,7 @@ parameters:
 services:
     media.object.form:
         class: AppBundle\Form\MediaObjectType
-        arguments: ['@service_container']
+        arguments: ['@service_container', '@security.token_storage']
         tags:
             - { name: form.type }
 

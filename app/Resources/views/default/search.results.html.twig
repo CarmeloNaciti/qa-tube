@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block search %}
+    {% include 'default/partials/search.html.twig' %}
+{% endblock %}
+
 {% block body %}
     <body>
         <h3 class="footer navbar-default" style="text-align: center">{{ result|length }} Search Results for <em>{{ searchresult }}</em>:</h3><br>

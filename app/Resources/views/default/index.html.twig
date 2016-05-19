@@ -1,5 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% block header %}
+    <img src="http://blog.shoplet.com/wp-content/uploads/2015/11/Coffee-on-Desk.jpg" alt="" style="width:100%; height:800px; margin-top: -300px">
+{% endblock %}
+
+{% block search %}
+    {% include 'default/partials/search.html.twig' %}
+{% endblock %}
+
 {% block body %}
     <div class="container">
         <div class="col-sm-12">
@@ -8,7 +16,7 @@
                     <div class="panel-heading" data-id="{{ mainEntity.id }}"><h5><strong>{{ 'panels.featured_video'|trans({}, 'labels') }} </strong>{{ mainEntity.title }}</h5></div>
                     <div class="panel-body">
                         <video id="" class="video-js vjs-default-skin" controls preload="auto" poster="" data-setup='{}' style="height: 350px">
-                            <source src="{{ url('_media_item', {'mediaName' : mainEntity.mediaName}) }}" type="{{ mainEntity. mimeType }}">
+                            <source src="{{ url('_media_item', {'mediaName' : mainEntity.mediaName}) }}">
                         </video>
                     </div>
                 </div>
@@ -24,7 +32,7 @@
                         <div class="panel-heading" data-id="{{ entity.id }}">{{ entity.title }}</div>
                         <div class="panel-body">
                             <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">
-                                <source src="{{ url('_media_item', {'mediaName' : entity.mediaName}) }}" type="{{ entity.mimeType }}">
+                                <source src="{{ url('_media_item', {'mediaName' : entity.mediaName}) }}">
                             </video>
                         </div>
                     </div>
@@ -40,7 +48,7 @@
                         <div class="panel-heading" data-id="{{ entity.id }}">{{ entity.title }} <span class="label label-default" id="views_label">{{ entity.views }} views</span></div>
                         <div class="panel-body">
                             <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">
-                                <source src="{{ url('_media_item', {'mediaName' : entity.mediaName}) }}" type="{{ entity.mimeType }}">
+                                <source src="{{ url('_media_item', {'mediaName' : entity.mediaName}) }}">
                             </video>
                         </div>
                     </div>
@@ -56,7 +64,7 @@
                         <div class="panel-heading" data-id="{{ entity.id }}">{{ entity.title }}</div>
                         <div class="panel-body">
                             <video id="" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}' style="height: 250px">
-                                <source src="{{ url('_media_item', {'mediaName' : entity.mediaName}) }}" type="{{ entity.mimeType }}">
+                                <source src="{{ url('_media_item', {'mediaName' : entity.mediaName}) }}">
                             </video>
                         </div>
                     </div>

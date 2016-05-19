@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class MediaObjectType extends AbstractType
@@ -17,12 +18,15 @@ class MediaObjectType extends AbstractType
      */
     protected $containerInterface;
 
+    protected $security_context;
+
     /**
      * @inheritdoc
      */
-    public function __construct(ContainerInterface $containerInterface)
+    public function __construct(ContainerInterface $containerInterface, TokenStorage $security_context)
     {
         $this->containerInterface = $containerInterface;
+        $this->security_context = $security_context;
     }
 
     /**
@@ -35,6 +39,9 @@ class MediaObjectType extends AbstractType
                 'required'      => false,
                 'allow_delete'  => false,
                 'download_link' => false,
+                'attr' => [
+                    'accept' => 'video/*'
+                ]
             ))
             ->add('story', TextType::class)
             ->add('title', TextType::class)
@@ -43,7 +50,12 @@ class MediaObjectType extends AbstractType
             ->add('team', ChoiceType::class, array('choices' => $this->containerInterface->getParameter('teams')))
             ->add('environment', ChoiceType::class, array('choices' => $this->containerInterface->getParameter('environments')))
             ->add('type', ChoiceType::class, array('choices' => $this->containerInterface->getParameter('issue_type')))
-            ->add('user', TextType::class);
+            ->add('user', TextType::class, array(
+                'data' => $this->security_context->getToken()->getUser(),
+                'attr' => [
+                    'readonly' => 'readonly',
+                ]
+            ));
     }
 
     /**

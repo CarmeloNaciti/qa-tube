@@ -19,7 +19,7 @@ class JiraManager
      */
     public function __construct($jiraUri)
     {
-        $this->jiraApi = new Jira_Api($jiraUri, new Jira_Api_Authentication_Basic("", "!"));
+        $this->jiraApi = new Jira_Api($jiraUri, new Jira_Api_Authentication_Basic("", ""));
     }
 
     /**

@@ -1,8 +1,9 @@
 buttons:
     home: 'Home'
-    add: 'Add'
+    upload: 'Upload a video'
     edit: 'Edit'
     delete: 'Delete'
+    my_videos: 'Manage videos'
 panels:
     featured_video: 'Featured Video:'
     latest_videos: 'Latest Videos'
