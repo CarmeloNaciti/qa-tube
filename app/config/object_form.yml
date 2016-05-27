@@ -1,0 +1,14 @@
+parameters:
+    environments:
+        'Web' : 'web'
+        'Merge' : 'merge'
+        'FAT' : 'fat'
+        'Production' : 'production'
+        'Training' : 'trainning'
+        'Marketing' : 'marketing'
+    teams:
+        'Client Services' : 'Client Services'
+        'Business' : 'Business'
+    issue_type:
+        'Bug-Fix' : 'bug-fix'
+        'New Feature' : 'New Feature'
