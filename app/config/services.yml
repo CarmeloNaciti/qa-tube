@@ -11,5 +11,9 @@ services:
             - { name: form.type }
 
     form_authenticator:
-              class: AppBundle\Security\FormAuthenticator
-              arguments: ['@router']
+        class: AppBundle\Security\FormAuthenticator
+        arguments: ['@router']
+
+    query.manager:
+        class: AppBundle\Entity\Queries\Manager
+        arguments: ['@doctrine.orm.entity_manager']

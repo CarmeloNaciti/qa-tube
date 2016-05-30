@@ -4,7 +4,7 @@ $(function() {
             query = encodeURI($searchText.val().trim());
 
         if (query.length > 0) {
-            var href = Routing.generate('_search_object', {'searchterm' : encodeURI($searchText.val())});
+            var href = Routing.generate('_search_object', {'searchTerm' : encodeURI($searchText.val())});
 
             window.location.replace(href);
             window.location.href = href;

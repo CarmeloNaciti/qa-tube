@@ -20,29 +20,10 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $mainRepository = $this->getDoctrine()
-            ->getRepository('AppBundle:MediaObject');
-
-        $query = $mainRepository->createQueryBuilder('p')
-            ->where('p.type = :views')
-            ->setParameter('views', 'New Feature')
-            ->orderBy('p.timestamp', 'DESC')
-            ->getQuery();
-
-        $mainEntity = $query->getResult();
-
-        $popularRepository = $this->getDoctrine()
-            ->getRepository('AppBundle:MediaObject');
-
-        $query = $popularRepository->createQueryBuilder('p')
-            ->orderBy('p.views', 'DESC')
-            ->getQuery();
-
-        $popularEntities = $query->getResult();
-
-        $trainingEntities = $this->getDoctrine()
-            ->getRepository('AppBundle:MediaObject')
-            ->findBy(['type' => 'Training']);
+        $manager = $this->get('query.manager');
+        $mainEntity = $manager->getFeaturedResult();
+        $trainingEntities = $manager->getResultByType('Training');
+        $popularEntities = $manager->getPopularResults();        
 
         return $this->render('default/index.html.twig', [
             'mainEntity' => (!empty($mainEntity)) ? $mainEntity[0] : null,
@@ -60,17 +41,14 @@ class DefaultController extends Controller
     public function addObjectAction(Request $request)
     {
         $mediaObject = new MediaObject();
-
         $form = $this->createForm(MediaObjectType::class, $mediaObject);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($mediaObject);
             $manager->flush();
-            $this->addFlash('notice', 'Upload successful');
+//            $this->addFlash('notice', 'Upload successful');
 
             $entity = $this->getDoctrine()
                 ->getRepository('AppBundle:MediaObject')
@@ -93,18 +71,16 @@ class DefaultController extends Controller
 
     public function editObjectAction(Request $request, $id)
     {
-        $mediaObject = $this->getDoctrine()
-            ->getRepository('AppBundle:MediaObject')
-            ->find($id);
+        $entity = $this->get('query.manager')->getEntityById($id);
 
-        $form = $this->createForm(MediaObjectType::class, $mediaObject);
+        $form = $this->createForm(MediaObjectType::class, $entity);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $manager = $this->getDoctrine()->getManager();
-            $manager->persist($mediaObject);
+            $manager->persist($entity);
             $manager->flush();
 
             return $this->redirectToRoute('_view_object', ['id' => $id]);
@@ -125,9 +101,7 @@ class DefaultController extends Controller
      */
     public function viewObjectAction($id)
     {
-        $entity = $this->getDoctrine()
-            ->getRepository('AppBundle:MediaObject')
-            ->find($id);
+        $entity = $this->get('query.manager')->getEntityById($id);
 
         $helper = $this->get('vich_uploader.templating.helper.uploader_helper');
         $path = $helper->asset($entity, 'mediaFile');
@@ -145,23 +119,15 @@ class DefaultController extends Controller
         );
     }
 
-    public function searchAction($searchterm)
+    public function searchAction($searchTerm)
     {
-        $repository = $this->getDoctrine()
-            ->getRepository('AppBundle:MediaObject');
-
-        $query = $repository->createQueryBuilder('p')
-            ->where('LOWER(p.title) LIKE :searchterm')
-            ->setParameter('searchterm', '%'.$searchterm.'%')
-            ->orderBy('p.title', 'ASC')
-            ->getQuery();
-
-        $result = $query->getResult();
+        $manager = $this->get('query.manager');
+        $result = $manager->getSearchResults($searchTerm);
 
         return $this->render('default/search.results.html.twig',
             [
                 'result' => $result,
-                'searchresult' => $searchterm,
+                'searchresult' => $searchTerm,
             ]
         );
     }
@@ -173,8 +139,9 @@ class DefaultController extends Controller
      */
     public function deleteObjectAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em ->getRepository('AppBundle:MediaObject')->find($id);
+        $manager = $this->get('query.manager');
+        $em = $manager->getEntityManager();
+        $entity = $manager->getEntityById($id);
 
         if (!$entity) {
             return new JsonResponse(['deleted' => false]);
