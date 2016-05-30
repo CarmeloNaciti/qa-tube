@@ -19,7 +19,7 @@ class JiraManager
      */
     public function __construct($jiraUri)
     {
-        $this->jiraApi = new Jira_Api($jiraUri, new Jira_Api_Authentication_Basic("", ""));
+        $this->jiraApi = new Jira_Api($jiraUri, new Jira_Api_Authentication_Basic("le-rouxe", "Canb3rra3"));
     }
 
     /**
@@ -39,8 +39,22 @@ class JiraManager
         return new JiraStory($story);
     }
 
+    /**
+     * @return mixed
+     */
     public function getProjects()
     {
         return $this->jiraApi->getProjects();
+    }
+
+    /**
+     * @param string $story
+     * @param mixed  $params
+     *
+     * @return mixed
+     */
+    public function addJiraComment($story, $params)
+    {
+        return $this->jiraApi->addComment($story, $params);
     }
 }

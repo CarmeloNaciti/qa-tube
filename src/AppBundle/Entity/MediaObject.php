@@ -51,6 +51,11 @@ class MediaObject
     protected $story;
 
     /**
+     * @ORM\Column(type="bool")
+     */
+    protected $isSignOff;
+
+    /**
      * @ORM\Column(type="string", length=100)
      */
     protected $type;
@@ -408,5 +413,21 @@ class MediaObject
     public function getMimeType()
     {
         return $this->mimeType;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsSignOff()
+    {
+        return $this->isSignOff;
+    }
+
+    /**
+     * @param bool $isSignOff
+     */
+    public function setIsSignOff($isSignOff)
+    {
+        $this->isSignOff = $isSignOff;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Jira\JiraManager;
 use AppBundle\Entity\MediaObject;
 use AppBundle\Form\MediaObjectType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -51,10 +52,21 @@ class DefaultController extends Controller
             $manager->saveEntity($mediaObject);
 
             $entity = $manager->getEntityByColumn('mediaName', $mediaObject->getMediaName());
+            $entityId = $entity->getId();
+
+            if ($mediaObject->getIsSignOff()) {
+                $videoUri = $this->get('router')->generate('_view_object', [
+                    'id' => $entityId
+                ]);
+                $jiraUri = $this->container->getParameter('uri.jira');
+                $jiraManager = new JiraManager($jiraUri);
+
+                $jiraManager->addJiraComment($mediaObject->getStory(), $mediaObject->getEnvironment() . " sign off link -> $videoUri");
+            }
 
             return $this->redirectToRoute('_view_object',
                 [
-                    'id' => $entity->getId()
+                    'id' => $entityId
                 ]
             );
         }

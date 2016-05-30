@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -44,6 +45,7 @@ class MediaObjectType extends AbstractType
                 ]
             ))
             ->add('story', TextType::class)
+            ->add('isSignOff', CheckboxType::class)
             ->add('title', TextType::class)
             ->add('description', TextType::class)
             ->add('tags', TextType::class)
