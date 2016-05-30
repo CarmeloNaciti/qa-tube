@@ -19,7 +19,7 @@ services:
         arguments: ['@doctrine.orm.entity_manager']
 
     string.replace.twig_extension:
-        class: AppBundle\Twig\StringReplaceExtension
+        class: AppBundle\Twig\FormatStringExtension
         public: false
         tags:
             - { name: twig.extension }

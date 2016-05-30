@@ -6,7 +6,7 @@ namespace AppBundle\Twig;
  * Class AppExtension
  * @package AppBundle\Twig
  */
-class StringReplaceExtension extends \Twig_Extension
+class FormatStringExtension extends \Twig_Extension
 {
     /**
      * @return array
@@ -14,7 +14,8 @@ class StringReplaceExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('ireplace', [$this, 'stringReplaceCaseInsensitive'])
+            new \Twig_SimpleFilter('ireplace', [$this, 'stringReplaceCaseInsensitive']),
+            new \Twig_SimpleFilter('snakecase', [$this, 'toSnakeCase']),
         ];
     }
 
@@ -27,6 +28,14 @@ class StringReplaceExtension extends \Twig_Extension
     public function stringReplaceCaseInsensitive($input, array $replace)
     {
         return str_ireplace(array_keys($replace), array_values($replace), $input);
+    }
+
+    public function toSnakeCase($input)
+    {
+        $input = preg_replace("/[^A-Za-z0-9 ]/", ' ', $input);
+        $input = preg_replace('/\s+/', ' ', $input);
+
+        return strtolower(str_replace(' ', '_', $input));
     }
 
     /**

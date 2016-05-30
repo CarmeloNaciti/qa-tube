@@ -4,6 +4,7 @@
 
 {% block search %}
     {% include 'default/partials/search.html.twig' %}
+    {% include 'default/partials/search_filter.html.twig' %}
 {% endblock %}
 
 {% block body %}
@@ -12,7 +13,7 @@
         <div class="container">
         {% for entity in result %}
                 <div class="col-xs-4">
-                    <div class="demo-content bg-alt">
+                    <div class="{{ entity.team|snakecase }}">
                         <div class="panel panel-info">
                             <div class="panel-heading" data-id="{{ entity.id }}">{{ format.highlight(entity.title, searchresult) }}</div>
                             <div class="panel-body">

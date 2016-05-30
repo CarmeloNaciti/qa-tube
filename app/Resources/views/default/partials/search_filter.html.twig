@@ -1,0 +1,13 @@
+<div class="col-xs-12 text-center">
+    {% set teams = [] %}
+    {% for entity in result %}
+        {% if entity.team not in teams %}
+            {% set teams = teams|merge([entity.team]) %}
+                <button class="btn btn-info btn-team">
+                    <i class="glyphicon glyphicon-ok"></i>
+                    <i class="glyphicon glyphicon-remove hidden"></i>
+                    <span id="text">{{ entity.team }}</span>
+                </button>
+        {% endif %}
+    {% endfor %}
+</div>
