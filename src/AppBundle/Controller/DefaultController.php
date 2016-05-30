@@ -67,17 +67,14 @@ class DefaultController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $originalName = $mediaObject->getMediaFile()->getClientOriginalName();
-
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($mediaObject);
             $manager->flush();
-
             $this->addFlash('notice', 'Upload successful');
 
             $entity = $this->getDoctrine()
                 ->getRepository('AppBundle:MediaObject')
-                ->findOneBy(['mediaName' => $originalName]);
+                ->findOneBy(['mediaName' => $mediaObject->getMediaName()]);
 
             return $this->redirectToRoute('_view_object',
                 [
