@@ -26,6 +26,19 @@ $(function() {
 });
 
 $(function() {
+   $('.btn-team').on('click', function () {
+       var $this = $(this);
+
+       $this.find('.glyphicon-ok').toggleClass('hidden');
+       $this.find('.glyphicon-remove').toggleClass('hidden');
+       $this.toggleClass('btn-info');
+       $this.toggleClass('btn-warning');
+
+       $('.' + _.snakeCase($this.find('#text').text())).toggleClass('hidden');
+   })
+});
+
+$(function() {
     $('#delete_object').on('click', function (event) {
 
         event.preventDefault();

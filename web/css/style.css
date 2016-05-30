@@ -39,3 +39,8 @@
 .center {
     text-align: center;
 }
+
+.btn-team {
+    width: 300px;
+    margin-bottom: 15px;
+}
