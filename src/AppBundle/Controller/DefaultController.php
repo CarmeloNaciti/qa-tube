@@ -21,7 +21,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $manager = $this->get('query.manager');
-        $latestEntity = $manager->getFeaturedResult();
+        $latestEntity = $manager->getLatestResult();
         $trainingEntities = $manager->getResultByType('Training');
         $popularEntities = $manager->getPopularResults();        
 
@@ -129,6 +129,8 @@ class DefaultController extends Controller
      */
     public function searchAction($searchTerm)
     {
+        $searchTerm = urldecode($searchTerm);
+
         $result = $this->get('query.manager')->getSearchResults($searchTerm);
 
         return $this->render('default/search.results.html.twig',

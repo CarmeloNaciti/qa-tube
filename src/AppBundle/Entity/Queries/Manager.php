@@ -38,11 +38,9 @@ class Manager
     /**
      * @return array
      */
-    public function getFeaturedResult()
+    public function getLatestResult()
     {
         $query = $this->repository->createQueryBuilder('p')
-            ->where('p.type = :views')
-            ->setParameter('views', 'New Feature')
             ->orderBy('p.timestamp', 'DESC')
             ->getQuery();
 
@@ -79,8 +77,9 @@ class Manager
     public function getSearchResults($searchTerm)
     {
         $query = $this->repository->createQueryBuilder('p')
-            ->where('LOWER(p.title) LIKE :searchterm')
-            ->setParameter('searchterm', '%'.$searchTerm.'%')
+            ->where('LOWER(p.title) LIKE :search_term')
+            ->orWhere('LOWER(p.description) LIKE :search_term')
+            ->setParameter('search_term', '%'.$searchTerm.'%')
             ->orderBy('p.title', 'ASC')
             ->getQuery();
 

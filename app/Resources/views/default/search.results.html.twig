@@ -1,3 +1,5 @@
+{% import "default/macro/format.html.twig" as format %}
+
 {% extends 'base.html.twig' %}
 
 {% block search %}
@@ -12,11 +14,9 @@
                 <div class="col-xs-4">
                     <div class="demo-content bg-alt">
                         <div class="panel panel-info">
-                            <div class="panel-heading" data-id="{{ entity.id }}">{{ entity.title }}</div>
+                            <div class="panel-heading" data-id="{{ entity.id }}">{{ format.highlight(entity.title, searchresult) }}</div>
                             <div class="panel-body">
-                                <video id="" class="video-js vjs-default-skin" controls preload="auto" poster="" data-setup='{}' style="height: 200px">
-                                    <source src="{{ url('_media_item', {'mediaName' : entity.mediaName}) }}" type="{{ entity.mimeType }}">
-                                </video>
+                                {{ format.highlight(entity.description, searchresult) }}
                             </div>
                         </div>
                     </div>

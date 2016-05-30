@@ -1,0 +1,3 @@
+{% macro highlight(text, searchresult) %}
+    <p>{{ text|replace({(searchresult) : '<span style="background-color: yellow">' ~ searchresult ~ '</span>'})|raw }}</p>
+{% endmacro %}
