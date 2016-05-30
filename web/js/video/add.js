@@ -20,7 +20,6 @@ $(function() {
 function populateFormData(data) {
     $('#media_object_title').val(data.summary);
     $('#media_object_description').val(data.description);
-    // $('#media_object_user').val(data.assignee);
-    //$('#media_object_tags');
-    //$('#media_object_team');
+    $('#media_object_tags').val(data.labels.join(', '));
+    $('#media_object_team').val(data.teamName);
 }
