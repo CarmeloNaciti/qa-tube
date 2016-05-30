@@ -41,18 +41,17 @@ class DefaultController extends Controller
     public function addObjectAction(Request $request)
     {
         $mediaObject = new MediaObject();
+
         $form = $this->createForm(MediaObjectType::class, $mediaObject);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager = $this->getDoctrine()->getManager();
-            $manager->persist($mediaObject);
-            $manager->flush();
-//            $this->addFlash('notice', 'Upload successful');
+            $manager = $this->get('query.manager');
 
-            $entity = $this->getDoctrine()
-                ->getRepository('AppBundle:MediaObject')
-                ->findOneBy(['mediaName' => $mediaObject->getMediaName()]);
+            $manager->saveEntity($mediaObject);
+
+            $entity = $manager->getEntityByColumn('mediaName', $mediaObject->getMediaName());
 
             return $this->redirectToRoute('_view_object',
                 [
@@ -79,9 +78,7 @@ class DefaultController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $manager = $this->getDoctrine()->getManager();
-            $manager->persist($entity);
-            $manager->flush();
+            $this->get('query.manager')->saveEntity($entity);
 
             return $this->redirectToRoute('_view_object', ['id' => $id]);
         }
@@ -101,14 +98,15 @@ class DefaultController extends Controller
      */
     public function viewObjectAction($id)
     {
-        $entity = $this->get('query.manager')->getEntityById($id);
+        $manager = $this->get('query.manager');
+        $em = $manager->getEntityManager();
+        $entity = $manager->getEntityById($id);
 
         $helper = $this->get('vich_uploader.templating.helper.uploader_helper');
         $path = $helper->asset($entity, 'mediaFile');
 
-        $manager = $this->getDoctrine()->getManager();
         $entity->setViews($entity->getViews() + 1);
-        $manager->flush();
+        $em->flush();
 
         return $this->render('default/object.view.html.twig',
             [
@@ -119,10 +117,14 @@ class DefaultController extends Controller
         );
     }
 
+    /**
+     * @param $searchTerm
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function searchAction($searchTerm)
     {
-        $manager = $this->get('query.manager');
-        $result = $manager->getSearchResults($searchTerm);
+        $result = $this->get('query.manager')->getSearchResults($searchTerm);
 
         return $this->render('default/search.results.html.twig',
             [
@@ -140,15 +142,13 @@ class DefaultController extends Controller
     public function deleteObjectAction($id)
     {
         $manager = $this->get('query.manager');
-        $em = $manager->getEntityManager();
         $entity = $manager->getEntityById($id);
 
         if (!$entity) {
             return new JsonResponse(['deleted' => false]);
         }
 
-        $em->remove($entity);
-        $em->flush();
+        $manager->deleteEntity($entity);
 
         return new JsonResponse(['deleted' => true]);
     }

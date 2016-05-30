@@ -96,4 +96,33 @@ class Manager
     {
         return $this->repository->find($id);
     }
+
+    /**
+     * @param $columnName
+     * @param $value
+     *
+     * @return \AppBundle\Entity\MediaObject
+     */
+    public function getEntityByColumn($columnName, $value)
+    {
+        return $this->repository->findOneBy([$columnName => $value]);
+    }
+
+    /**
+     * @param $entity
+     */
+    public function saveEntity($entity)
+    {
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @param $entity
+     */
+    public function deleteEntity($entity)
+    {
+        $this->entityManager->remove($entity);
+        $this->entityManager->flush();
+    }
 }
