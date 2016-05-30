@@ -17,3 +17,9 @@ services:
     query.manager:
         class: AppBundle\Entity\Queries\Manager
         arguments: ['@doctrine.orm.entity_manager']
+
+    string.replace.twig_extension:
+        class: AppBundle\Twig\StringReplaceExtension
+        public: false
+        tags:
+            - { name: twig.extension }
