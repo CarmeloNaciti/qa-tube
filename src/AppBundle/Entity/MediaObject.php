@@ -51,7 +51,7 @@ class MediaObject
     protected $story;
 
     /**
-     * @ORM\Column(type="bool")
+     * @var bool
      */
     protected $isSignOff;
 

@@ -55,9 +55,10 @@ class DefaultController extends Controller
             $entityId = $entity->getId();
 
             if ($mediaObject->getIsSignOff()) {
-                $videoUri = $this->get('router')->generate('_view_object', [
+                $videoUri = $request->getHost() . $this->get('router')->generate('_view_object', [
                     'id' => $entityId
                 ]);
+
                 $jiraUri = $this->container->getParameter('uri.jira');
                 $jiraManager = new JiraManager($jiraUri);
 
