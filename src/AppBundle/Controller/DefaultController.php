@@ -21,13 +21,12 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $manager = $this->get('query.manager');
-        $mainEntity = $manager->getFeaturedResult();
+        $latestEntity = $manager->getFeaturedResult();
         $trainingEntities = $manager->getResultByType('Training');
         $popularEntities = $manager->getPopularResults();        
 
         return $this->render('default/index.html.twig', [
-            'mainEntity' => (!empty($mainEntity)) ? $mainEntity[0] : null,
-            'latestEntities' => $mainEntity,
+            'latestEntities' => $latestEntity,
             'trainingEntities' => $trainingEntities,
             'popularEntities' => $popularEntities,
         ]);
@@ -68,6 +67,12 @@ class DefaultController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function editObjectAction(Request $request, $id)
     {
         $entity = $this->get('query.manager')->getEntityById($id);
