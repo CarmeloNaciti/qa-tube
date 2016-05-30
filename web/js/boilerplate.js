@@ -48,7 +48,7 @@ $(function() {
                     if (data['deleted']) {
                         swal({
                             title: 'Deleted!',
-                            text: 'Your file has been deleted.',
+                            text: 'Hope this does not come as a surprise.',
                             type: 'success',
                             allowOutsideClick: false,
                             animation: false
