@@ -38,7 +38,7 @@
                         <td><sup>Environment:</sup><br />{{ article.environment }}</td>
                         <td><sup>Views:</sup><br />{{ article.views }}</td>
                         <td class="center">
-                            <button class="btn btn-info" id="delete_object" data-id="{{ article.id }}">{{ 'buttons.delete'|trans({}, 'labels') }}</button>
+                            <button class="btn btn-info delete_object" data-id="{{ article.id }}">{{ 'buttons.delete'|trans({}, 'labels') }}</button>
                             <a href="{{ url('_edit_object', {'id' : article.id}) }}" class="btn btn-info" role="button" id="edit_object">{{ 'buttons.edit'|trans({}, 'labels') }}</a>
                         </td>
                     </tr>

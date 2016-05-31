@@ -39,7 +39,7 @@ $(function() {
 });
 
 $(function() {
-    $('#delete_object').on('click', function (event) {
+    $('.delete_object').on('click', function (event) {
 
         event.preventDefault();
 

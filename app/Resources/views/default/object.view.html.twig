@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     {% if is_granted('ROLE_ADMIN') and app.user.username == entity.user %}
-                        <button class="btn btn-info" id="delete_object" data-id="{{ entity.id }}">{{ 'buttons.delete'|trans({}, 'labels') }}</button>
+                        <button class="btn btn-info delete_object" data-id="{{ entity.id }}">{{ 'buttons.delete'|trans({}, 'labels') }}</button>
                         <a href="{{ url('_edit_object', {'id' : entity.id}) }}" class="btn btn-info" role="button" id="edit_object">{{ 'buttons.edit'|trans({}, 'labels') }}</a>
                     {% endif %}
                 </div>
