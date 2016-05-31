@@ -44,3 +44,15 @@
     width: 300px;
     margin-bottom: 15px;
 }
+
+.table-odd-row {
+    background-color: #F9F9F9;
+}
+
+.btn-medium {
+    width: 200px;
+}
+
+.search-result-heading {
+    color: #1b6d85;
+}

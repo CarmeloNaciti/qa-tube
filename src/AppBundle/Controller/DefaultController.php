@@ -155,6 +155,26 @@ class DefaultController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param $user
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function searchUserObjectsAction(Request $request, $user)
+    {
+        $sort = $request->query->get('sort', 'p.timestamp');
+        $direction = $request->query->get('direction', 'DESC');
+        $page = $request->query->get('page', 1);
+
+        $query = $this->get('query.manager')->getUserObjectSearchQuery($user, $sort, $direction);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($query, $page, 10);
+
+        return $this->render('default/user.objects.html.twig', ['pagination' => $pagination]);
+    }
+
+    /**
      * @param $id
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse

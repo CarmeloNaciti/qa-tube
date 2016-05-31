@@ -23,6 +23,10 @@ _search_object:
     options:
         expose: true
 
+_search_user_objects:
+    path: '/user/search/{user}'
+    defaults: { _controller: 'AppBundle:Default:searchUserObjects' }
+
 _delete_object:
     path: '/object/delete/{id}'
     defaults: { _controller: 'AppBundle:Default:deleteObject'}

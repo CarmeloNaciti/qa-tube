@@ -80,10 +80,28 @@ class Manager
             ->where('LOWER(p.title) LIKE :search_term')
             ->orWhere('LOWER(p.description) LIKE :search_term')
             ->setParameter('search_term', '%'.$searchTerm.'%')
-            ->orderBy('p.title', 'ASC')
+            ->orderBy('p.timestamp', 'ASC')
             ->getQuery();
 
         return $query->getResult();
+    }
+
+    /**
+     * @param $user
+     * @param string $sort
+     * @param string $direction
+     *
+     * @return \Doctrine\ORM\Query
+     */
+    public function getUserObjectSearchQuery($user, $sort, $direction)
+    {
+        $query = $this->repository->createQueryBuilder('p')
+            ->where('LOWER(p.user) LIKE :user')
+            ->setParameter('user', '%'.$user.'%')
+            ->orderBy($sort, $direction)
+            ->getQuery();
+
+        return $query;
     }
 
     /**
