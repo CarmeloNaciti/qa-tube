@@ -136,22 +136,28 @@ class DefaultController extends Controller
     }
 
     /**
+     * @param Request $request
      * @param $searchTerm
-     *
+     * 
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function searchAction($searchTerm)
+    public function searchAction(Request $request, $searchTerm)
     {
         $searchTerm = urldecode($searchTerm);
 
-        $result = $this->get('query.manager')->getSearchResults($searchTerm);
+        $sort = $request->query->get('sort', 'p.timestamp');
+        $direction = $request->query->get('direction', 'DESC');
+        $page = $request->query->get('page', 1);
 
-        return $this->render('default/search.results.html.twig',
-            [
-                'result' => $result,
-                'searchresult' => $searchTerm,
-            ]
-        );
+        $query = $this->get('query.manager')->getSearchResults($searchTerm, $sort, $direction);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($query, $page, 5);
+
+        return $this->render('default/search.results.html.twig', [
+            'pagination' => $pagination,
+            'searchresult' => $searchTerm,
+        ]);
     }
 
     /**

@@ -8,21 +8,64 @@
 {% endblock %}
 
 {% block body %}
-    <body>
-        <h3 class="footer navbar-default" style="text-align: center">{{ result|length }} Search Results for <em>{{ searchresult }}</em>:</h3><br>
-        <div class="container">
-        {% for entity in result %}
-                <div class="col-xs-4">
-                    <div class="{{ entity.team|snakecase }}">
-                        <div class="panel panel-info">
-                            <div class="panel-heading" data-id="{{ entity.id }}">{{ format.highlight(entity.title, searchresult) }}</div>
-                            <div class="panel-body">
-                                {{ format.highlight(entity.description, searchresult) }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        {% endfor %}
+    <br />
+    <div class="container">
+        <div class="col-xs-12">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle btn-medium" type="button" data-toggle="dropdown">Sort results by
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li>{{ knp_pagination_sortable(pagination, 'Story', 'p.story') }}</li>
+                    <li>{{ knp_pagination_sortable(pagination, 'Date', 'p.timestamp') }}</li>
+                    <li>{{ knp_pagination_sortable(pagination, 'Title', 'p.title') }}</li>
+                    <li>{{ knp_pagination_sortable(pagination, 'Environment', 'p.environment') }}</li>
+                    <li>{{ knp_pagination_sortable(pagination, 'Views', 'p.views') }}</li>
+                </ul>
+            </div>
+            <div class="pull-right">
+                {{ pagination.getTotalItemCount }} Results
+            </div>
+            <br />
+            <table class="table">
+                <tr>
+                    <th width="25%"></th>
+                    <th width="25%"></th>
+                    <th width="26%"></th>
+                    <th width="24%"></th>
+                </tr>
+
+                {% for article in pagination %}
+                    <tr class="table-odd-row {{ article.team|snakecase }}">
+                        <td colspan="4">
+                            <h4>
+                                <a href="{{ url('_view_object', {'id' : article.id}) }}">
+                                    <i class="glyphicon glyphicon-play-circle glyphicon-heading"></i> {{ format.highlight(article.story, searchresult) }} {{ format.highlight(article.title, searchresult) }}
+                                </a>
+                                <sup class="search-team">{{ article.team }}</sup>
+                            </h4>
+                            {{ format.highlight(article.description, searchresult) }}<br /><br />
+                        </td>
+                    </tr>
+                    <tr class="{{ article.team|snakecase }}">
+                        <td><sup>Added:</sup><br />{{ article.timestamp|date('Y-m-d g:ia') }}</td>
+                        <td><sup>Environment:</sup><br />{{ article.environment }}</td>
+                        <td><sup>Views:</sup><br />{{ article.views|default(0) }}</td>
+                        <td class="center">
+                            {% if app.user.username == article.user %}
+                                <button class="btn btn-info delete_object" data-id="{{ article.id }}">{{ 'buttons.delete'|trans({}, 'labels') }}</button>
+                                <a href="{{ url('_edit_object', {'id' : article.id}) }}" class="btn btn-info" role="button" id="edit_object">{{ 'buttons.edit'|trans({}, 'labels') }}</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"></td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {# display navigation #}
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
         </div>
-    </body>
+    </div>
 {% endblock %}

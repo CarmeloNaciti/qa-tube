@@ -71,19 +71,22 @@ class Manager
 
     /**
      * @param $searchTerm
+     * @param $sort
+     * @param $direction
      *
-     * @return array
+     * @return \Doctrine\ORM\Query
      */
-    public function getSearchResults($searchTerm)
+    public function getSearchResults($searchTerm, $sort, $direction)
     {
         $query = $this->repository->createQueryBuilder('p')
             ->where('LOWER(p.title) LIKE :search_term')
             ->orWhere('LOWER(p.description) LIKE :search_term')
+            ->orWhere('LOWER(p.story) LIKE :search_term')
             ->setParameter('search_term', '%'.$searchTerm.'%')
-            ->orderBy('p.timestamp', 'ASC')
+            ->orderBy($sort, $direction)
             ->getQuery();
 
-        return $query->getResult();
+        return $query;
     }
 
     /**

@@ -21,25 +21,23 @@
             <br />
             <table class="table">
                 <tr>
-                    {# sorting of properties based on query components #}
                     <th width="25%"></th>
                     <th width="25%"></th>
                     <th width="26%"></th>
                     <th width="24%"></th>
                 </tr>
 
-                {# table body #}
                 {% for article in pagination %}
                     <tr class="table-odd-row">
                         <td colspan="4">
-                            <h4><a href="{{ url('_view_object', {'id' : article.id}) }}"><i class="glyphicon glyphicon-play-circle glyphicon-heading"></i> {{ article.story }} {{ article.title }}</h4></a>
+                            <h4><a href="{{ url('_view_object', {'id' : article.id}) }}"><i class="glyphicon glyphicon-play-circle glyphicon-heading"></i> {{ article.story }} {{ article.title }}</a></h4>
                             {{ article.description }}<br /><br />
                         </td>
                     </tr>
                     <tr>
                         <td><sup>Added:</sup><br />{{ article.timestamp|date('Y-m-d g:ia') }}</td>
                         <td><sup>Environment:</sup><br />{{ article.environment }}</td>
-                        <td><sup>Views:</sup><br />{{ article.views }}</td>
+                        <td><sup>Views:</sup><br />{{ article.views|default(0) }}</td>
                         <td class="center">
                             <button class="btn btn-info delete_object" data-id="{{ article.id }}">{{ 'buttons.delete'|trans({}, 'labels') }}</button>
                             <a href="{{ url('_edit_object', {'id' : article.id}) }}" class="btn btn-info" role="button" id="edit_object">{{ 'buttons.edit'|trans({}, 'labels') }}</a>
