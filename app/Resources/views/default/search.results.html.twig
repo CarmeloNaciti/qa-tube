@@ -22,8 +22,9 @@
                     <li>{{ knp_pagination_sortable(pagination, 'Views', 'p.views') }}</li>
                 </ul>
             </div>
+
             <div class="pull-right">
-                {{ pagination.getTotalItemCount }} Results
+                {{ pagination.getTotalItemCount }} Results for <em>{{ searchresult }}</em>
             </div>
             <br />
             <table class="table">
@@ -41,7 +42,11 @@
                                 <a href="{{ url('_view_object', {'id' : article.id}) }}">
                                     <i class="glyphicon glyphicon-play-circle glyphicon-heading"></i> {{ format.highlight(article.story, searchresult) }} {{ format.highlight(article.title, searchresult) }}
                                 </a>
-                                <sup class="search-team">{{ article.team }}</sup>
+                                {% if app.user.username == article.user %}
+                                    <sup class="search-team" style="color: #761c19">You added this entry!</sup>
+                                {% else %}
+                                    <sup class="search-team">{{ article.team }}</sup>
+                                {% endif %}
                             </h4>
                             {{ format.highlight(article.description, searchresult) }}<br /><br />
                         </td>
