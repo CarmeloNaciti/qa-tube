@@ -45,7 +45,9 @@ class MediaObjectType extends AbstractType
                 ]
             ))
             ->add('story', TextType::class)
-            ->add('isSignOff', CheckboxType::class)
+            ->add('isSignOff', CheckboxType::class, [
+                'required' => false,
+            ])
             ->add('title', TextType::class)
             ->add('description', TextType::class)
             ->add('tags', TextType::class)
