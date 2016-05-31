@@ -169,7 +169,7 @@ class DefaultController extends Controller
         $query = $this->get('query.manager')->getUserObjectSearchQuery($user, $sort, $direction);
 
         $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate($query, $page, 10);
+        $pagination = $paginator->paginate($query, $page, 5);
 
         return $this->render('default/user.objects.html.twig', ['pagination' => $pagination]);
     }
