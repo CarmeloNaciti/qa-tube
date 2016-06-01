@@ -45,17 +45,18 @@ class FormatStringExtension extends \Twig_Extension
     }
 
     /**
-     * @param $text
-     * @param $query
+     * @param string $text
+     * @param string $query
+     * @param int    $expand
      *
      * @return string
      */
-    public function generateSnippet($text, $query)
+    public function generateSnippet($text, $query, $expand = 5)
     {
         $start = stripos($text, $query);
         $len = strlen($text);
         $end = strpos($text, ' ', $start + strlen($query));
-        $expand = 5;
+        $end = ($end == false) ? $len : $end;
         $before = '';
         $after = '';
 
@@ -65,7 +66,7 @@ class FormatStringExtension extends \Twig_Extension
             $before = implode(' ', array_reverse(array_slice($words, 0, $expand)));
         }
 
-        if ($end < $len) {
+        if ($start + strlen($query) < $len - 1) {
             $words = explode(' ', substr($text, $end + 1, $len - 1));
             $expand = (sizeof($words) > $expand) ? $expand : sizeof($words);
             $after = implode(' ', array_slice($words, 0, $expand));
