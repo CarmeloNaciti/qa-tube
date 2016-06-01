@@ -1,3 +1,12 @@
 {% macro highlight(text, searchresult) %}
     {{ text|ireplace({(searchresult) : '<span style="background-color: yellow">' ~ searchresult ~ '</span>'})|raw }}
 {% endmacro %}
+
+{% macro show_snippet(text, searchresult) %}
+    {% if searchresult|lower in text|lower %}
+        {{ text|snippet(searchresult)|ireplace({(searchresult) : '<span style="background-color: yellow">' ~ searchresult ~ '</span>'})|raw }}
+        <br /><br />
+    {% endif %}
+{% endmacro %}}
+
+

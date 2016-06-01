@@ -48,7 +48,7 @@
                                     <sup class="search-team">{{ article.team }}</sup>
                                 {% endif %}
                             </h4>
-                            {{ format.highlight(article.description, searchresult) }}<br /><br />
+                            {{ format.show_snippet(article.description, searchresult) }}
                         </td>
                     </tr>
                     <tr class="{{ article.team|snakecase }}">

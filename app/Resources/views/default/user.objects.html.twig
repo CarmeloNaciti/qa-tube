@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block search %}
+    {% include 'default/partials/search.html.twig' %}
+{% endblock %}
+
 {% block body %}
     <br />
     <div class="container">
@@ -30,8 +34,7 @@
                 {% for article in pagination %}
                     <tr class="table-odd-row">
                         <td colspan="4">
-                            <h4><a href="{{ url('_view_object', {'id' : article.id}) }}"><i class="glyphicon glyphicon-play-circle glyphicon-heading"></i> {{ article.story }} {{ article.title }}</a></h4>
-                            {{ article.description }}<br /><br />
+                            <h4><a href="{{ url('_view_object', {'id' : article.id}) }}"><i class="glyphicon glyphicon-play-circle glyphicon-heading"></i> {{ article.story }} - {{ article.title }}</a></h4>
                         </td>
                     </tr>
                     <tr>
