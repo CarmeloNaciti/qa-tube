@@ -54,11 +54,16 @@ class FormatStringExtension extends \Twig_Extension
     {
         $start = stripos($text, $query);
         $len = strlen($text);
-        $end = $start + strlen($query);
-        $end = strpos($text, ' ', $end);
+        $end = strpos($text, ' ', $start + strlen($query));
         $expand = 5;
         $before = '';
         $after = '';
+
+        if ($start > 0) {
+            $words = array_reverse(explode(' ', substr($text, 0, $start)));
+            $expand = (sizeof($words) > $expand) ? $expand : sizeof($words);
+            $before = implode(' ', array_reverse(array_slice($words, 0, $expand)));
+        }
 
         if ($end < $len) {
             $words = explode(' ', substr($text, $end + 1, $len - 1));
@@ -66,13 +71,7 @@ class FormatStringExtension extends \Twig_Extension
             $after = implode(' ', array_slice($words, 0, $expand));
         }
 
-        if ($start > 0) {
-            $words = array_reverse(explode(' ', substr($text, 0, $start - 1)));
-            $expand = (sizeof($words) > $expand) ? $expand : sizeof($words);
-            $before = implode(' ', array_reverse(array_slice($words, 0, $expand)));
-        }
-
-        $result = $before . ' ' . substr($text, $start, $end - $start) . ' ' . $after;
+        $result = $before . substr($text, $start, $end - $start) . ' ' . $after;
 
         return '...' . $result . '...';
     }
